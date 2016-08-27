@@ -1,0 +1,38 @@
+<ParmDisplay>
+  <SSRSReport ReportID="-8003" ReportName="PortfolioAppraisal" DisplayName="Portfolio Appraisal (SSRS)" Description="The Portfolio Appraisal report displays portfolio holdings as of a selected date. Values include unit and total cost, market price and value, percentage of portfolio, and yield. This report runs only in single currency." />
+  <Parameters>
+    <row ParmName="SessionGuid" DisplayName="SessionGuid" ParmSectionID="3" ParmTypeID="31" IsRequired="0" />
+    <row ParmName="Portfolios" DisplayName="Portfolio" ParmSectionID="1" ParmTypeID="309" LookupRowDefID="338" IsRequired="1" />
+    <row ParmName="Date" DisplayName="Date" ParmSectionID="1" ParmTypeID="2" IsRequired="1" />
+    <row ParmName="ReportingCurrencyCode" DisplayName="Reporting Currency" ParmSectionID="1" ParmTypeID="11" IsRequired="1" />
+    <row ParmName="ClassificationID" DisplayName="Classification Level 1" ParmSectionID="1" ParmTypeID="13" IsRequired="1" />
+    <row ParmName="ClassificationID2" DisplayName="Classification Level 2" ParmSectionID="1" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="ClassificationID3" DisplayName="Classification Level 3" ParmSectionID="1" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="IncludeUnsupervisedAssets" DisplayName="Include Unsupervised Assets" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
+    <row ParmName="DisplayOption" DisplayName="Show Unrealized Gain/Loss" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
+    <row ParmName="DisplayAnnIncome" DisplayName="Show Estimated Annual Profit" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
+    <row ParmName="DisplayAcqDate" DisplayName="Show Last Acquisition Date" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
+    <row ParmName="ReportTitle" DisplayName="Report Title" ParmSectionID="1" ParmTypeID="1" IsRequired="1" DefaultValue="Portfolio Appraisal" />
+    <row ParmName="ShowTaxLotsLumped" DisplayName="Tax Lots" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="ShowCurrencyFullPrecision" DisplayName="Currency Display" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="AccruedInterestID" DisplayName="Accrued Profit" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="YieldOptionID" DisplayName="Yield" ParmSectionID="2" ParmTypeID="13" IsRequired="1" />
+    <row ParmName="BondCostBasisID" DisplayName="Sukuk Cost Basis" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="MFBasisIncludeReinvest" DisplayName="Mutual Fund Cost Basis" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="UseSettlementDate" DisplayName="Settlement Date" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="ShowCurrentMBSFace" DisplayName="MBS Face" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="ShowCurrentTIPSFace" DisplayName="TIPS Face" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="LocaleID" DisplayName="Locale" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="PriceTypeID" DisplayName="Price Set" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />
+    <row ParmName="ShowSecuritySymbol" DisplayName="Show Symbol" ParmSectionID="2" ParmTypeID="11" IsRequired="0" />
+    <row ParmName="OverridePortfolioSettings" DisplayName="Override Portfolio Settings" ParmSectionID="2" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="0" ParmTypeDefaultName="True" ParmTypeDefaultValue="1" />
+    <row ParmName="ServerURL" DisplayName="ServerURL" ParmSectionID="3" ParmTypeID="34" IsRequired="0" />
+  </Parameters>
+  <Lookups>
+    <row ParmTypeID="309" LookupFieldName="ReportingCode" IsKey="1" IsValue="1" IsSorted="1" IsHidden="0" />
+    <row ParmTypeID="309" LookupFieldName="ReportHeading" IsKey="0" IsValue="0" IsSorted="0" IsHidden="0" />
+    <row ParmTypeID="309" LookupFieldName="ShortName" IsKey="0" IsValue="0" IsSorted="0" IsHidden="0" />
+    <row ParmTypeID="309" LookupFieldName="Code" IsKey="0" IsValue="0" IsSorted="0" IsHidden="1" />
+    <row ParmTypeID="309" LookupFieldName="ClassDisplayName" IsKey="0" IsValue="0" IsSorted="0" IsHidden="1" />
+  </Lookups>
+</ParmDisplay>

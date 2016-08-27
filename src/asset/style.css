@@ -1,0 +1,221 @@
+html,
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+ol, ul {
+    -webkit-margin-start: 0px;
+    -webkit-margin-before: 0px;
+    -webkit-padding-start: 0px;
+    list-style: none;
+}
+
+header {
+    top: 0px;
+    width: 100%;
+    background-color: rgb(220, 220, 220)
+}
+
+header .logo {
+    width: 154px;
+    height: 36px;
+    background-image: url('./logo-nav.png');
+    background-repeat: no-repeat;
+}
+
+header > ul {
+    display: inline-block;
+    list-style: none;
+    margin: 0px;
+}
+
+header > ul > li {
+    display: inline-block;
+    height: 46px;
+    line-height: 46px;
+}
+
+/* important thing is the float, if element floated, it will not adjusted to the normal text. */
+.navbar-brand {
+    float: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+}
+
+.navbar-title {
+    float: left;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    margin-right: 0.7rem;
+    font-size: 1rem;
+}
+
+.navbar-brand:focus,
+.navbar-brand:hover {
+    text-decoration: none;
+}
+
+div.main {
+    position: relative;
+    padding-top: 56px;
+    padding-bottom: 20px;
+}
+
+.main .left-sidebar {
+    width: 120px;
+    position: absolute;
+    left: 0px;
+    top: 56px;
+    padding: 0.5em;
+}
+
+main {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-left: 120px;
+}
+
+footer {
+    width: 100%;
+    height: 20px;
+    -webkit-padding-start: 0px;
+    position: absolute;
+    bottom: 0px;
+}
+
+footer > ul {
+    -webkit-padding-start: 0px;
+    list-style: none;
+    margin: 0px;
+}
+
+footer > ul > li {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+}
+
+.card-header-pills{
+    margin-right: -.625rem;
+    margin-left: -.625rem;
+}
+
+.btn-margin {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.table-margin {
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.tile-header {
+    color: #8F8F8F;
+    font-style: unset;
+    background: -webkit-linear-gradient(top, #F2F2F2, #EDEDED, #E0E0E0, #F2F2F2);
+}
+
+.my-dialog {
+    clear: both;
+    overflow: hidden;
+    padding: 20px;
+    min-width: 420px;
+}
+
+.section-radio {
+    float: left;
+    margin-right: 50px;
+    margin-left: 20px;
+    width: 200px;
+    padding: 10px;
+}
+
+.section-radio-margin {
+    margin: 10px auto;
+    padding-left: 100px;
+}
+
+.section-checkbox {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.section-button {
+    padding: 20px;
+    margin-left: 150px;
+    margin-top: 20px;
+    clear: both;
+    width: 100%;
+    overflow: hidden;
+    display: table;
+}
+
+.section-dropdown {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.section-loading-form {
+    margin-top: 10px;
+    border: 2px solid gray;
+    height: 300px;
+}
+
+.section-form {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.section-ssrs {
+    margin-top: -50px;
+    margin-left: -90px;
+    margin-right: 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+}
