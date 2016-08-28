@@ -12,7 +12,10 @@ function detectValue(appraisalParm) {
     if (appraisalParm.ParmSectionID === "1") {
         return appraisalParm.DefaultValue;
     } else if (appraisalParm.ParmSectionID === "5") {
-        return (appraisalParm.ParmTypeDefaultValue === "1") ? true : false;
+        if (appraisalParm.ParmTypeDefaultValue === "0") {
+            return false;
+        } 
+        return true;
     }
     return "";
 }
@@ -60,6 +63,7 @@ export class ReplangService {
 
     public getSSRSReportUILayout(isDialog: boolean): Object {
         let ssrs: any = this.ssrsData;
+        console.warn(ssrs);
         let bodys = [];
         let section1forms1: Array<any> = [];
         let section1forms2: Array<any> = [];
@@ -68,9 +72,11 @@ export class ReplangService {
         let section1Parm: Array<AppraisalParm> = [];
         let section2Parm: Array<AppraisalParm> = [];
 
+        if(!ssrs.ParmDisplay) return;
+
         let ui: any;
         if (isDialog) {
-            ui= {
+            ui = {
                 type: "myDialog",
                 options: {
                     id: "ssrs_report",
@@ -173,40 +179,35 @@ export class ReplangService {
         return ui;
     }
 
+    public pushControls(sectionForms: Array<any>, appraisalParm: AppraisalParm) {
+        let formControl: Object = {
+            type: "myFormControl",
+            options: {
+                title: detectTitle(appraisalParm),
+                mode: appraisalParm.ParmTypeID,
+                value: detectValue(appraisalParm),
+                IsRequired: appraisalParm.IsRequired,
+                items: [],
+                click: function () {
+
+                },
+                onchange: function() {
+
+                }
+            }
+        };
+        sectionForms.push(formControl);
+    }
+
     public addRowToForm(sectionRows: Array<AppraisalParm>, sectionForms1: Array<any>, sectionForms2: Array<any>): void {
         let halfLength: number = Math.ceil(sectionRows.length / 2);
         console.info(sectionRows);
         for (let i = 0; i < sectionRows.length; i++) {
             let appraisalParm: AppraisalParm = sectionRows[i];
             if (i < halfLength) {
-                sectionForms1.push({
-                    type: "myFormControl",
-                    options: {
-                        title: detectTitle(appraisalParm),
-                        mode: appraisalParm.ParmTypeID,
-                        value: detectValue(appraisalParm),
-                        IsRequired: appraisalParm.IsRequired,
-                        items: [],
-
-                        click: function () {
-
-                        }
-                    }
-                });
+                this.pushControls(sectionForms1, appraisalParm);
             } else {
-                sectionForms2.push({
-                    type: "myFormControl",
-                    options: {
-                        title: detectTitle(appraisalParm),
-                        mode: appraisalParm.ParmTypeID,
-                        value: detectValue(appraisalParm),
-                        IsRequired: appraisalParm.IsRequired,
-                        items: [],
-                        click: function () {
-
-                        }
-                    }
-                });
+               this.pushControls(sectionForms2, appraisalParm);
             }
         }
     }

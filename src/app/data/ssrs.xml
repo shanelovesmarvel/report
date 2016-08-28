@@ -8,9 +8,9 @@
     <row ParmName="ClassificationID" DisplayName="Classification Level 1" ParmSectionID="1" ParmTypeID="13" IsRequired="1" />
     <row ParmName="ClassificationID2" DisplayName="Classification Level 2" ParmSectionID="1" ParmTypeID="13" IsRequired="0" />
     <row ParmName="ClassificationID3" DisplayName="Classification Level 3" ParmSectionID="1" ParmTypeID="13" IsRequired="0" />
-    <row ParmName="IncludeUnsupervisedAssets" DisplayName="Include Unsupervised Assets" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
+    <row ParmName="IncludeUnsupervisedAssets" DisplayName="Include Unsupervised Assets" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="1" />
     <row ParmName="DisplayOption" DisplayName="Show Unrealized Gain/Loss" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
-    <row ParmName="DisplayAnnIncome" DisplayName="Show Estimated Annual Profit" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
+    <row ParmName="DisplayAnnIncome" DisplayName="Show Estimated Annual Profit" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="1" />
     <row ParmName="DisplayAcqDate" DisplayName="Show Last Acquisition Date" ParmSectionID="1" ParmTypeID="5" IsRequired="0" ParmTypeDefaultID="1" ParmTypeDefaultName="False" ParmTypeDefaultValue="0" />
     <row ParmName="ReportTitle" DisplayName="Report Title" ParmSectionID="1" ParmTypeID="1" IsRequired="1" DefaultValue="Portfolio Appraisal" />
     <row ParmName="ShowTaxLotsLumped" DisplayName="Tax Lots" ParmSectionID="2" ParmTypeID="13" IsRequired="0" />

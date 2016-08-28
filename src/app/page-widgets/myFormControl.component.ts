@@ -23,8 +23,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
                    </select>
                </template>
                <template [ngSwitchCase] = "options.mode === '5'">
-                    <input type="checkbox" style="margin-top: 15px;" [required]="options.IsRequired"   
-                           [value]= "options.value" id="twoColumnForm">
+                    <input type="checkbox" class="form-checkbox-margin" [required]="options.IsRequired"   
+                           [checked]= "options.value" id="twoColumnForm">
                </template>
                <template [ngSwitchCase] = "options.mode === '1'">
                    <input type="text" class="form-control form-control-sm" [required]="options.IsRequired"
