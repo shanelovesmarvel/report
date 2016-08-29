@@ -114,7 +114,11 @@ export class ReplangService {
                     {
                         type: "myNavbar",
                         options: {
-
+                            click: function() {
+                                if(!isDialog){
+                                    window.open("http://localhost:3000/report/-3939;reportType=SSRS", "SSRS");
+                                }
+                            }
                         }
                     }
                 ]
@@ -465,7 +469,7 @@ export class ReplangService {
                                 {
                                     type: "mySection",
                                     options: {
-                                        klass: "section",
+                                        klass: "section-checkbox",
                                         children: [
                                             {
                                                 type: "myTitle",
@@ -675,7 +679,7 @@ export class ReplangService {
                                                     id: "securityTypes",
                                                     label: "Security Types",
                                                     value: "securityTypes",
-                                                    groupName: "chartType",
+                                                    groupName: "chartCategories",
                                                     click: function (context) {
 
                                                     }
@@ -695,7 +699,7 @@ export class ReplangService {
                             buttonText: "OK",
                             dismiss: "modal",
                             click: function (context) {
-                                window.open("http://localhost:3000/report/-3979", "Report Result");
+                                window.open("http://localhost:3000/report/-3939;reportType=Portfolio", "Portfolio");
                             }
                         }
                     },

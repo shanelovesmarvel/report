@@ -38,8 +38,9 @@ export class PageEngineComponent implements OnInit, OnDestroy {
          this._subscriber = this._route.params.subscribe( params=>{
             let id = +params['pageId'];
             let linkfield = +params['linkfield'];
+            let reportType = params['reportType'];
 
-            let pageData = this._pageEngineService.getPageData( id, linkfield );
+            let pageData = this._pageEngineService.getPageData( id, linkfield, reportType );
 
             // add engine service
             for(let methodName in this._engineService){

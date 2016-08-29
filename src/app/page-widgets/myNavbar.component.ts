@@ -28,7 +28,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
             </ul>
             <ul class="pull-sm-right">
                 <li>
-                    <button class="btn btn-primary btn-md">Run</button>
+                    <button class="btn btn-primary btn-md" (click)="clickHandler()">Run</button>
                 </li>
             </ul>
         </div>
@@ -38,5 +38,14 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 export class MyNavbarComponent {
     @Input() options: any;
     constructor() {
+    }
+
+    clickHandler(){
+        let context = this.options;
+        if( !context.service ){
+            context.service = {};
+        }
+
+        this.options.click( this );
     }
 }

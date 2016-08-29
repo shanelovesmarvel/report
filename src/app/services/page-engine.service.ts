@@ -13,7 +13,7 @@ export class PageEngineService {
         private _transporterService: TransporterService) {
     }
 
-    public getPageData(pageId: number, linkfield: any): any {
+    public getPageData(pageId: number, linkfield: any, reportType: string): any {
         switch (pageId) {
 
             case -4222:
@@ -34,10 +34,38 @@ export class PageEngineService {
                 return this.showDialog();                //Portfolio summary dialog
             case -3979:
                 return this.showSSRS();
+            case -3939:
+                return this.showOutput(reportType);
 
         };
 
         return {};
+    }
+
+    private showOutput(reportType: string) {
+        let data: any = {};
+
+        let ui = {
+            children: [
+                {
+                    type: "myTitle",
+                    options: {
+                        title: reportType + " Report Output",
+                        level: 1
+                    }
+                }
+            ]
+        }
+
+        let service: any = {};
+
+        let result = {
+            data: data,
+            ui: ui,
+            service: service
+        }
+
+        return result;
     }
 
     private showSSRS() {
@@ -149,32 +177,6 @@ export class PageEngineService {
                 }
             ]
         }
-
-        let result = {
-            data: data,
-            ui: ui,
-            service: service
-        }
-
-        return result;
-    }
-
-    private showReorgDialog() {
-        let data: any = {};
-
-        let ui = {
-            children: [
-                {
-                    type: "myTitle",
-                    options: {
-                        title: "Report Output",
-                        level: 1
-                    }
-                }
-            ]
-        }
-
-        let service: any = {};
 
         let result = {
             data: data,
