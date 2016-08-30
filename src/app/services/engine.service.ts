@@ -10,9 +10,6 @@ export class EngineService {
         let recursiveFindControl = function (parent: any, id: string) {
             let result = null;
 
-            console.info(parent);
-            console.info(id);
-
             if (parent && parent.options && parent.options.id && parent.options.id === id) {
                 result = parent;
             }

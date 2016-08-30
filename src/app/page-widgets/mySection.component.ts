@@ -21,10 +21,11 @@ selector: 'my-section',
 directives: [ ROUTER_DIRECTIVES, MyTitleComponent, MyButtonComponent, MyFormGroupCheckboxComponent, 
               MyFormGroupRadioButtonComponent, MyFormGroupDropdownComponent, 
               MyFormGroupDatePickerComponent, MyFormGroupEditboxComponent, 
-              MyFormComponent, MySpinnerComponent, MySpanComponent],
+              MyFormComponent, MySpinnerComponent, MySpanComponent, MySectionComponent],
 template: `
-<section [class] = "options.klass" *ngIf="!options.isHidden">
+<section [class] = "options.klass" *ngIf="!options.isHidden" id="{{options.id}}">
     <div *ngFor="let d of options.children">
+
         <!-- title -->
         <my-title *ngIf="d.type === 'myTitle' "
                   [options] = d.options>
@@ -66,6 +67,8 @@ template: `
         <my-spinner *ngIf="d.type === 'mySpinner'" [options] = d.options [isRunning]="options.isRunning">
         </my-spinner>
 
+        <my-section *ngIf="d.type === 'mySection'" [options] = d.options [pageContext] = "pageContext">
+        </my-section>
     </div>
 </section>
 `

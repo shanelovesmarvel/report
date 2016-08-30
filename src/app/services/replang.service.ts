@@ -14,7 +14,7 @@ function detectValue(appraisalParm) {
     } else if (appraisalParm.ParmSectionID === "5") {
         if (appraisalParm.ParmTypeDefaultValue === "0") {
             return false;
-        } 
+        }
         return true;
     }
     return "";
@@ -31,12 +31,13 @@ function detectTitle(appraisalParm) {
 @Injectable()
 export class ReplangService {
 
-    constructor(private _transporter: TransporterService, private _rep: RepService) {
+    constructor(private _transporter: TransporterService, 
+                private _rep: RepService) {
     }
 
     public ssrsData: any;
 
-    public getDialogData(dialogType: string): Object {
+    public getPortfolioSummaryData(dialogType: string): Object {
         if (dialogType === "summary") {
             return this._transporter.getSummaryData();
         } else if (dialogType == "reorg") {
@@ -50,17 +51,6 @@ export class ReplangService {
         });
     }
 
-
-    public getSummaryConfirmation(): string {
-        this._rep.getSecuritySymbolsByType("rockets");
-        let result: string = "";
-        this._rep.securitySymbols().subscribe((res: any) => {
-            result = res;
-        });
-        return result;
-        //return "Prices are not avaliable for 12/31/2016. Do you wish to continue to run this report ?";
-    }
-
     public getSSRSReportUILayout(isDialog: boolean): Object {
         let ssrs: any = this.ssrsData;
         console.warn(ssrs);
@@ -72,7 +62,7 @@ export class ReplangService {
         let section1Parm: Array<AppraisalParm> = [];
         let section2Parm: Array<AppraisalParm> = [];
 
-        if(!ssrs.ParmDisplay) return;
+        if (!ssrs.ParmDisplay) return;
 
         let ui: any;
         if (isDialog) {
@@ -81,7 +71,7 @@ export class ReplangService {
                 options: {
                     id: "ssrs_report",
                     dialogId: "ssrs_report",
-                    title: ssrs.ParmDisplay.SSRSReport.DisplayName,
+                    title: ssrs.ParmDisplay.SSRSReport.DisplayName, 
                     body: [
                         {
                             type: "myDialogBody",
@@ -114,8 +104,8 @@ export class ReplangService {
                     {
                         type: "myNavbar",
                         options: {
-                            click: function() {
-                                if(!isDialog){
+                            click: function () {
+                                if (!isDialog) {
                                     window.open("http://localhost:3000/report/-3939;reportType=SSRS", "SSRS");
                                 }
                             }
@@ -195,7 +185,7 @@ export class ReplangService {
                 click: function () {
 
                 },
-                onchange: function() {
+                onchange: function () {
 
                 }
             }
@@ -211,11 +201,403 @@ export class ReplangService {
             if (i < halfLength) {
                 this.pushControls(sectionForms1, appraisalParm);
             } else {
-               this.pushControls(sectionForms2, appraisalParm);
+                this.pushControls(sectionForms2, appraisalParm);
             }
         }
     }
 
+    public getPortfolioSummaryUILayout(): Object {
+        let ui = {
+            children: [
+                {
+                    type: "mySection",
+                    options: {
+                        id: "portfolioSummary",
+                        klass: "section-border",
+                        children: [
+                            {
+                                type: "myTitle",
+                                options: {
+                                    title: "Report: Summary",
+                                    level: 3
+                                }
+                            },
+                            {
+                                type: "myTitle",
+                                options: {
+                                    title: "This report displays portfolio holdings as a selected date, without detailing individual securities.",
+                                    level: 6
+                                }
+                            },
+                            {
+                                type: "mySection",
+                                options: {
+                                    klass: "section",
+                                    children: [
+                                        {
+                                            type: "myFormGroupDropdown",
+                                            options: {
+                                                id: "portfolioDropdown",
+                                                label: "Portfolio",
+                                                disabled: false,
+                                                name: "portfolioDropdown",
+                                                click: function (context) {
+                                                    var portfolio = context.pageContext.service.findControl("portfolioDropdown");
+                                                    portfolio.options.items = context.pageContext.service.getPortfolioSummaryData().portfolio;
+                                                },
+                                                onchange: function (value) {
+                                                    console.warn(value);
+                                                }
+
+                                            }
+                                        },
+                                        {
+                                            type: "myFormGroupDropdown",
+                                            options: {
+                                                id: "currencyDropdown",
+                                                label: "Reporting Currency",
+                                                disabled: false,
+                                                name: "currencyDropdown",
+                                                click: function (context) {
+                                                    var portfolio = context.pageContext.service.findControl("portfolioDropdown");
+                                                    var currency = context.pageContext.service.findControl("currencyDropdown");
+                                                    currency.options.items = context.pageContext.service.getPortfolioSummaryData().currency;
+                                                },
+                                                onchange: function (value) {
+                                                    console.warn(value);
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "myFormGroupDatepicker",
+                                            options: {
+                                                label: "Date"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                type: "mySection",
+                                options: {
+                                    klass: "section",
+                                    children: [
+                                        {
+                                            type: "myFormGroupCheckbox",
+                                            options: {
+                                                label: "Include Unsupervised Assets",
+                                                value: "icu",
+                                                disabled: false,
+                                                click: function (context) {
+
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "myFormGroupCheckbox",
+                                            options: {
+                                                id: "chart",
+                                                label: "Chart",
+                                                disabled: false,
+                                                value: "chart",
+                                                click: function (context) {
+                                                    context.checked = !context.checked;
+                                                    var summarySection = context.pageContext.service.findControl("portfolioSummary");
+                                                    console.warn(summarySection);
+                                                    ($("#"+ summarySection.options.id) as any).addClass("fadeOutUp");
+                                                    var chartOptions = context.pageContext.service.getPortfolioSummaryChartUILayout();
+                                                    context.pageContext.ui.children.push(chartOptions);
+                                                    var chartSection = context.pageContext.service.findControl("portfolioSummaryChart");
+                                                    //($("#"+ chartSection.options.id) as any).addClass("fadeInUp");
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                type: "mySpan",
+                                options: {
+                                    klass: "",
+                                    children: [
+                                        {
+                                            type: "myButton",
+                                            options: {
+                                                buttonText: "OK",
+                                                id: "confirmBtn",
+                                                click: function (context) {
+
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "myButton",
+                                            options: {
+                                                buttonText: "Consolidate",
+                                                id: "consolidateBtn",
+                                                click: function (context) {
+                                                    console.warn(context);
+                                                    var portfolio = context.pageContext.service.findControl("portfolioDropdown");
+                                                    if (portfolio.options.items && portfolio.options.items.length > 0) {
+                                                        var selectedItem = portfolio.options.items[portfolio.options.selectedIndex];
+                                                        if (selectedItem.consolidated) {
+                                                            selectedItem.text = selectedItem.text.substring(1);
+                                                            selectedItem.consolidated = false;
+                                                        } else {
+                                                            selectedItem.text = "+" + selectedItem.text;
+                                                            selectedItem.consolidated = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "myButton",
+                                            options: {
+                                                buttonText: "Browse",
+                                                id: "browseBtn",
+                                                click: function (context) {
+
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "myButton",
+                                            options: {
+                                                buttonText: "Settings",
+                                                id: "settingsBtn",
+                                                click: function (context) {
+
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "myButton",
+                                            options: {
+                                                buttonText: "Cancel",
+                                                id: "cancelBtn",
+                                                click: function (context) {
+
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+        return ui;
+    }
+
+    public getPortfolioSummaryChartUILayout(): Object {
+        return {
+            type: "mySection",
+            options: {
+                id: "portfolioSummaryChart",
+                klass: "section-border fadeInUp",
+                children: [
+                    {
+                        type: "myTitle",
+                        options: {
+                            title: "Report: Chart Options",
+                            level: 3
+                        }
+                    },
+                    {
+                        type: "mySection",
+                        options: {
+                            klass: "section-radio",
+                            children: [
+                                {
+                                    type: "myTitle",
+                                    options: {
+                                        title: "Chart Type",
+                                        level: 5
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "pieRadio",
+                                        label: "Pie",
+                                        value: "pie",
+                                        groupName: "chartType",
+                                        click: function (context) {
+                                            var _3d = context.pageContext.service.findControl("3dCheck");
+                                            var _comLables = context.pageContext.service.findControl("labelCheck");
+                                            var _gridLines = context.pageContext.service.findControl("lineCheck");
+                                            _3d.options.disabled = !context.options.checked;
+                                            _comLables.options.disabled = !context.options.checked;
+                                            _gridLines.options.disabled = !context.options.checked;
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "barRadio",
+                                        label: "Bar",
+                                        value: "bar",
+                                        groupName: "chartType",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "columnRadio",
+                                        label: "Column",
+                                        value: "column",
+                                        groupName: "chartType",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "lineRadio",
+                                        label: "Line",
+                                        value: "line",
+                                        groupName: "chartType",
+                                        click: function (context) {
+                                            var _3d = context.pageContext.service.findControl("3dCheck");
+                                            var _comLables = context.pageContext.service.findControl("labelCheck");
+                                            var _gridLines = context.pageContext.service.findControl("lineCheck");
+                                            _3d.options.disabled = context.options.checked;
+                                            _comLables.options.disabled = context.options.checked;
+                                            _gridLines.options.disabled = context.options.checked;
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        type: "mySection",
+                        options: {
+                            klass: "section-checkbox",
+                            children: [
+                                {
+                                    type: "myTitle",
+                                    options: {
+                                        title: "Chart Format",
+                                        level: 5
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupCheckbox",
+                                    options: {
+                                        id: "3dCheck",
+                                        label: "3D",
+                                        value: "3d",
+                                        disabled: false,
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupCheckbox",
+                                    options: {
+                                        id: "labelCheck",
+                                        label: "Combined Labels",
+                                        disabled: false,
+                                        value: "comLabels",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupCheckbox",
+                                    options: {
+                                        id: "lineCheck",
+                                        label: "Grid Lines",
+                                        disabled: false,
+                                        value: "gridLines",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupCheckbox",
+                                    options: {
+                                        id: "legendCheck",
+                                        label: "Legend",
+                                        disabled: false,
+                                        value: "legend",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupCheckbox",
+                                    options: {
+                                        id: "markersCheck",
+                                        label: "Line Markers",
+                                        disabled: false,
+                                        value: "lineMarkers",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        type: "mySpan",
+                        options: {
+                            klass: "",
+                            children: [
+                                {
+                                    type: "myButton",
+                                    options: {
+                                        buttonText: "OK",
+                                        id: "confirmChartBtn",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myButton",
+                                    options: {
+                                        buttonText: "Cancel",
+                                        id: "cancelChartBtn",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    }
+
+
+    public getSummaryConfirmation(): string {
+        this._rep.getSecuritySymbolsByType("rockets");
+        let result: string = "";
+        this._rep.securitySymbols().subscribe((res: any) => {
+            result = res;
+        });
+        return result;
+        //return "Prices are not avaliable for 12/31/2016. Do you wish to continue to run this report ?";
+    }
 
     public getSummaryReportUILayout(): Object {
         return {
@@ -280,7 +662,8 @@ export class ReplangService {
                                             {
                                                 type: "myFormGroupDatepicker",
                                                 options: {
-                                                    label: "Date"
+                                                    label: "Date",
+                                                    id: "date"
                                                 }
                                             }
                                         ]
@@ -334,6 +717,7 @@ export class ReplangService {
                             modal: "modal",
                             target: "#portfolio_summary_confirm",
                             click: function (context) {
+                                console.warn(($("#date") as any).val());
                                 var confirmDialog = context.pageContext.service.getSummaryConfirmUILayout();
                                 context.pageContext.ui.children.push(confirmDialog);
                             }
@@ -719,8 +1103,6 @@ export class ReplangService {
 
 
 }
-
-
 
 
 

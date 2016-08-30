@@ -1,4 +1,4 @@
-# angular2-starter
+# angular2-report
 
 You should install some tools first:
 

@@ -36,10 +36,41 @@ export class PageEngineService {
                 return this.showSSRS();
             case -3939:
                 return this.showOutput(reportType);
+            case -3973:
+                return this.showPortfolioSummary();
 
         };
 
         return {};
+    }
+
+    private showPortfolioSummary() {
+        let data: any = {};
+
+        let ui = this._replangService.getPortfolioSummaryUILayout();
+
+        let service: any = {};
+
+        let that = this;
+
+        let getPortfolioSummaryData = function(){
+            return that._replangService.getPortfolioSummaryData("summary");
+        }
+
+        let getPortfolioSummaryChartUILayout = function() {
+            return that._replangService.getPortfolioSummaryChartUILayout();
+        }
+
+        service.getPortfolioSummaryData = getPortfolioSummaryData.bind(this);
+        service.getPortfolioSummaryChartUILayout = getPortfolioSummaryChartUILayout.bind(this);
+
+        let result = {
+            data: data,
+            ui: ui,
+            service: service
+        }
+
+        return result;
     }
 
     private showOutput(reportType: string) {
@@ -98,7 +129,7 @@ export class PageEngineService {
 
     private showDialog() {
         // data
-        let realData: any = this._replangService.getDialogData("summary");
+        let realData: any = this._replangService.getPortfolioSummaryData("summary");
 
         if (!this._replangService.ssrsData) {
             this._replangService.getSSRSData();

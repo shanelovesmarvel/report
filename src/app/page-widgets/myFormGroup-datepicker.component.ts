@@ -9,7 +9,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 <div class="form-group row">
   <label for="options.controlId" class="col-xs-3 col-form-label">{{options.label}}</label>
   <div class="col-xs-9">
-      <input type="date">
+      <input type="date" id="date">
   </div>
 </div>    
 `
