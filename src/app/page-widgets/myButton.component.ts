@@ -18,7 +18,6 @@ export class MyButtonComponent {
     @Input() options: any;
     @Input() pageContext: any;
     constructor( private _router: Router ) {
-        console.log(`constructor in MyButtonComponent.`);
     }
 
     clickHandler(){

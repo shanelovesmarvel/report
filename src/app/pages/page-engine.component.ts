@@ -62,7 +62,6 @@ export class PageEngineComponent implements OnInit, OnDestroy {
                 child.options.pageContext = pageData;
                 child.options.data = itemData;
                 child.options.service = service; 
-                console.log( child );
             }
 
             // page need the additinal query parameters

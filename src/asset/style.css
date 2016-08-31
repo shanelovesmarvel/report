@@ -180,6 +180,7 @@ footer > ul > li {
     border: 1px solid grey;
     padding: 10px;
     width: 600px;
+    margin: 0 auto;
 }
 
 .form-checkbox-margin {
@@ -199,69 +200,263 @@ footer > ul > li {
    }
 }
 
-
 .section-ssrs {
     margin-top: -50px;
     margin-left: -90px;
     margin-right: 20px;
 }
 
+/***********animation - fade in and move left ****************/
+.fadeInLeft {
+    position: relative;
+    animation: fadeInLeft 2s 1 normal ease-out;
+    -webkit-animation: fadeInLeft 2s 1 normal ease-out;
+    animation-fill-mode: both;
+    animation-direction: alternate; 
+}
+
+@keyframes fadeInLeft {
+    from {
+        left: 120px;
+        opacity: 0;
+    }
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInLeft {
+    from {
+        left: 120px;
+        opacity: 0;
+    }
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+/***********animation - fade out and move left ****************/
+.fadeOutLeft {
+    position: relative;
+    animation: fadeOutLeft 2s 1 normal ease-out;
+    -webkit-animation: fadeOutLeft 2s 1 normal ease-out;
+    animation-fill-mode: both;
+    animation-direction: alternate; 
+}
+
+@keyframes fadeOutLeft {
+    from {
+        left: 0;
+        opacity: 1;
+    }
+    to {
+        left: -120px;
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeOutLeft {
+    from {
+        left: 120px;
+        opacity: 1;
+    }
+    to {
+        left: 0;
+        opacity: 0;
+    }
+}
+/***********animation - fade out and move right***************/
+.fadeOutRight {
+    position: relative;
+    animation: fadeOutRight 2s 1 normal ease-out;
+    -webkit-animation: fadeOutRight 2s 1 normal ease-out;
+    animation-fill-mode: both;
+    animation-direction: alternate; 
+}
+
+@keyframes fadeOutRight {
+    from {
+        left: 0;
+        opacity: 1;
+    }
+    to {
+        left: 120px;
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeOutRight {
+    from {
+        left: 0;
+        opacity: 1;
+    }
+    to {
+        left: 120px;
+        opacity: 0;
+    }
+}
+
+/***********animation - fade in and move right***************/
+.fadeInRight {
+    position: relative;
+    animation: fadeInRight 2s 1 normal ease-out;
+    -webkit-animation: fadeInRight 2s 1 normal ease-out;
+    animation-fill-mode: both;
+    animation-direction: alternate; 
+}
+
+@keyframes fadeInRight {
+    from {
+        left: -120px;
+        top: -440px;
+        opacity: 0;
+    }
+    to {
+        left: 120px;
+        top: -440px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInRight {
+    from {
+        left: -120px;
+        top: -440px;
+        opacity: 0;
+    }
+    to {
+        left: 120px;
+        top: -440px;
+        opacity: 1;
+    }
+}
+
+
+/***********animation - fade out and move up***************/
+
 .fadeOutUp {
     position: relative;
-    animation: fadeOut 3s 1 normal ease;
-    -webkit-animation: fadeOut 3s 1 normal ease;
+    animation: fadeOutUp 1s 1 normal ease-out;
+    -webkit-animation: fadeOutUp 1s 1 normal ease-out;
     animation-fill-mode: both;
     animation-direction: alternate;
 }
 
+@keyframes fadeOutUp {
+    from {
+        top: 0;
+        opacity: 1;
+    }
+    to {
+        top: -120px;
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeOutUp {
+    from {
+        top: 0;
+        opacity: 1;
+    }
+    to {
+        top: -120px;
+        opacity: 0;
+    }
+}
+
+/***********animation - fade in and move up***************/
 .fadeInUp {
     position: relative;
-    animation: fadeIn 3s 1 normal ease;
-    -webkit-animation: fadeIn 3s 1 normal ease;
+    animation: fadeInUp 1s 1 normal ease;
+    -webkit-animation: fadeInUp 1s 1 normal ease;
     animation-fill-mode: both;
     animation-direction: alternate;
 }
 
-@keyframes fadeOut {
-    from {
-        top: 0;
-        opacity: 1;
-    }
-    to {
-        top: -300px;
-        opacity: 0;
-    }
-}
-
-@-webkit-keyframes fadeOut {
-    from {
-        top: 0;
-        opacity: 1;
-    }
-    to {
-        top: -300px;
-        opacity: 0;
-    }
-}
-
-@keyframes fadeIn {
+@keyframes fadeInUp {
     from {
         top: 0;
         opacity: 0;
     }
     to {
-        top: -440px;
+        top: -460px;
         opacity: 1;
     }
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes fadeInUp {
     from {
         top: 0;
         opacity: 0;
     }
     to {
-        top: -440px;
+        top: -460px;
         opacity: 1;
+    }
+}
+
+
+/***********animation - fade in and move down***************/
+.fadeInDown {
+    position: relative;
+    animation: fadeInDown 3s 1 normal ease;
+    -webkit-animation: fadeInDown 3s 1 normal ease;
+    animation-fill-mode: both;
+    animation-direction: alternate;
+}
+
+@keyframes fadeInDown {
+    from {
+        top: -120px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInDown {
+    from {
+        top: -120px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+/***********animation - fade out and move down***************/
+
+.fadeOutDown {
+    position: relative;
+    animation: fadeOutDown 2s 1 normal ease;
+    -webkit-animation: fadeOutDown 2s 1 normal ease;
+    animation-fill-mode: both;
+    animation-direction: alternate;
+}
+
+@keyframes fadeOutDown {
+    from {
+        top: -460px;
+        opacity: 1;
+    }
+    to {
+        top: 0;
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeOutDown {
+    from {
+        top: -460px;
+        opacity: 1;
+    }
+    to {
+        top: 0;
+        opacity: 0;
     }
 }

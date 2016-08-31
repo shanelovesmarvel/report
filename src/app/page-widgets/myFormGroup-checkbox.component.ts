@@ -18,13 +18,10 @@ export class MyFormGroupCheckboxComponent implements OnChanges  {
     @Input() options: any;
     @Input() pageContext: any;
 
-    checked: boolean = false;
-
     constructor(private _router: Router) {     
     }
 
     ngOnChanges(){
-        console.log( this.options );
     }
 
     checkHandler(event) {

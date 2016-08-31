@@ -51,7 +51,7 @@ export class MyGridComponent implements OnChanges {
             return item.Name === columnName;
         });
 
-        console.log(result);
+        //console.log(result);
 
         if (result) {
             let linkArray = [];

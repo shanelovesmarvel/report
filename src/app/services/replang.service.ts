@@ -31,8 +31,8 @@ function detectTitle(appraisalParm) {
 @Injectable()
 export class ReplangService {
 
-    constructor(private _transporter: TransporterService, 
-                private _rep: RepService) {
+    constructor(private _transporter: TransporterService,
+        private _rep: RepService) {
     }
 
     public ssrsData: any;
@@ -71,7 +71,7 @@ export class ReplangService {
                 options: {
                     id: "ssrs_report",
                     dialogId: "ssrs_report",
-                    title: ssrs.ParmDisplay.SSRSReport.DisplayName, 
+                    title: ssrs.ParmDisplay.SSRSReport.DisplayName,
                     body: [
                         {
                             type: "myDialogBody",
@@ -157,14 +157,11 @@ export class ReplangService {
         bodys.push({
             type: "mySection",
             options: {
-                isHidden: !isDialog,
+                isHidden: isDialog,
                 klass: "section-loading-form",
                 children: [
                     {
-                        type: "mySpinner",
-                        options: {
-                            isRunning: true
-                        }
+                        
                     }
                 ]
             }
@@ -207,6 +204,7 @@ export class ReplangService {
     }
 
     public getPortfolioSummaryUILayout(): Object {
+        let that = this;
         let ui = {
             children: [
                 {
@@ -301,14 +299,20 @@ export class ReplangService {
                                                 disabled: false,
                                                 value: "chart",
                                                 click: function (context) {
-                                                    context.checked = !context.checked;
+                                                    context.options.checked = true;
                                                     var summarySection = context.pageContext.service.findControl("portfolioSummary");
-                                                    console.warn(summarySection);
-                                                    ($("#"+ summarySection.options.id) as any).addClass("fadeOutUp");
-                                                    var chartOptions = context.pageContext.service.getPortfolioSummaryChartUILayout();
-                                                    context.pageContext.ui.children.push(chartOptions);
+                                                    ($("#" + summarySection.options.id) as any).removeClass("fadeInDown");
+                                                    ($("#" + summarySection.options.id) as any).removeClass("fadeInLeft");
+                                                    ($("#" + summarySection.options.id) as any).removeClass("fadeOutRight");
+                                                    ($("#" + summarySection.options.id) as any).addClass("fadeOutUp");
                                                     var chartSection = context.pageContext.service.findControl("portfolioSummaryChart");
-                                                    //($("#"+ chartSection.options.id) as any).addClass("fadeInUp");
+                                                    if (!chartSection) {
+                                                        var chartOptions = context.pageContext.service.getPortfolioSummaryChartUILayout();
+                                                        context.pageContext.ui.children.push(chartOptions);
+                                                    } else {
+                                                        ($("#" + chartSection.options.id) as any).removeClass("fadeOutDown");
+                                                        ($("#" + chartSection.options.id) as any).addClass("fadeInUp");
+                                                    }
                                                 }
                                             }
                                         }
@@ -324,9 +328,21 @@ export class ReplangService {
                                             type: "myButton",
                                             options: {
                                                 buttonText: "OK",
-                                                id: "confirmBtn",
+                                                id: "okBtn",
                                                 click: function (context) {
-
+                                                    var summarySection = context.pageContext.service.findControl("portfolioSummary");
+                                                    ($("#" + summarySection.options.id) as any).removeClass("fadeInDown");
+                                                    ($("#" + summarySection.options.id) as any).removeClass("fadeOutUp");
+                                                    ($("#" + summarySection.options.id) as any).removeClass("fadeInLeft");
+                                                    ($("#" + summarySection.options.id) as any).addClass("fadeOutRight");
+                                                    var confirmSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
+                                                    if (!confirmSection) {
+                                                        var chartOptions = context.pageContext.service.getPortfolioSummaryConfirmUILayout();
+                                                        context.pageContext.ui.children.push(chartOptions);
+                                                    } else {
+                                                        ($("#" + confirmSection.options.id) as any).removeClass("fadeOutLeft");
+                                                        ($("#" + confirmSection.options.id) as any).addClass("fadeInRight");
+                                                    }
                                                 }
                                             }
                                         },
@@ -336,7 +352,6 @@ export class ReplangService {
                                                 buttonText: "Consolidate",
                                                 id: "consolidateBtn",
                                                 click: function (context) {
-                                                    console.warn(context);
                                                     var portfolio = context.pageContext.service.findControl("portfolioDropdown");
                                                     if (portfolio.options.items && portfolio.options.items.length > 0) {
                                                         var selectedItem = portfolio.options.items[portfolio.options.selectedIndex];
@@ -566,7 +581,16 @@ export class ReplangService {
                                         buttonText: "OK",
                                         id: "confirmChartBtn",
                                         click: function (context) {
-
+                                            var chartSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
+                                            ($("#" + chartSection.options.id) as any).removeClass("fadeInUp");
+                                            ($("#" + chartSection.options.id) as any).addClass("fadeOutDown");
+                                            var summarySection = context.pageContext.service.findControl("portfolioSummary");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutUp");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeInLeft");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutRight");
+                                            ($("#" + summarySection.options.id) as any).addClass("fadeInDown");
+                                            var chart = context.pageContext.service.findControl("chart");
+                                            chart.options.checked = false;
                                         }
                                     }
                                 },
@@ -575,6 +599,210 @@ export class ReplangService {
                                     options: {
                                         buttonText: "Cancel",
                                         id: "cancelChartBtn",
+                                        click: function (context) {
+                                            var chartSection = context.pageContext.service.findControl("portfolioSummaryChart");
+                                            ($("#" + chartSection.options.id) as any).removeClass("fadeInUp");
+                                            ($("#" + chartSection.options.id) as any).addClass("fadeOutDown");
+                                            var summarySection = context.pageContext.service.findControl("portfolioSummary");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutUp");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeInLeft");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutRight");
+                                            ($("#" + summarySection.options.id) as any).addClass("fadeInDown");
+                                            var chart = context.pageContext.service.findControl("chart");
+                                            chart.options.checked = false;
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    }
+
+    public getPortfolioSummaryConfirmUILayout(): Object {
+        return {
+            type: "mySection",
+            options: {
+                id: "portfolioSummaryConfirm",
+                klass: "section-border fadeInRight",
+                children: [
+                    {
+                        type: "myTitle",
+                        options: {
+                            title: "Report: Confirm",
+                            level: 3
+                        }
+                    },
+                    {
+                        type: "myTitle",
+                        options: {
+                            title: this.getSummaryConfirmation(),
+                            level: 6
+                        }
+                    },
+                    {
+                        type: "mySpan",
+                        options: {
+                            klass: "",
+                            children: [
+                                {
+                                    type: "myButton",
+                                    options: {
+                                        buttonText: "OK",
+                                        id: "confirmBtn",
+                                        click: function (context) {
+                                            var confirmSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
+                                            ($("#" + confirmSection.options.id) as any).removeClass("fadeInRight");
+                                            ($("#" + confirmSection.options.id) as any).addClass("fadeOutRight");
+                                            var categoriesSection = context.pageContext.service.findControl("portfolioSummaryChartCategories");
+                                            if (!categoriesSection) {
+                                                var categoriesOptions = context.pageContext.service.getPortfolioSummaryChartCategoriesUILayout();
+                                                context.pageContext.ui.children.push(categoriesOptions);
+                                            } else {
+                                                ($("#" + categoriesSection.options.id) as any).removeClass("fadeOutLeft");
+                                                ($("#" + categoriesSection.options.id) as any).addClass("fadeInRight");
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myButton",
+                                    options: {
+                                        buttonText: "Cancel",
+                                        id: "cancelChartBtn",
+                                        click: function (context) {
+                                            var summarySection = context.pageContext.service.findControl("portfolioSummary");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeInDown");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutUp");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutRight");
+                                            ($("#" + summarySection.options.id) as any).addClass("fadeInLeft");
+                                            var confirmSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
+                                            ($("#" + confirmSection.options.id) as any).removeClass("fadeInRight");
+                                            ($("#" + confirmSection.options.id) as any).addClass("fadeOutLeft");
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    }
+
+    public getPortfolioSummaryChartCategoriesUILayout(): Object {
+        return {
+            type: "mySection",
+            options: {
+                id: "portfolioSummaryChartCategories",
+                klass: "section-border fadeInRight",
+                children: [
+                    {
+                        type: "myTitle",
+                        options: {
+                            title: "Report: Chart Categories",
+                            level: 3
+                        }
+                    },
+                    {
+                        type: "myTitle",
+                        options: {
+                            title: "A graph can be created based on the following categories:",
+                            level: 6
+                        }
+                    },
+                    {
+                        type: "mySection",
+                        options: {
+                            klass: "section-radio-margin",
+                            children: [
+                                {
+                                    type: "myTitle",
+                                    options: {
+                                        title: "Chart Categories",
+                                        level: 5
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "assetClasses",
+                                        label: "Asset Classes",
+                                        value: "assetClasses",
+                                        groupName: "chartCategories",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "industryGroups",
+                                        label: "Industry Groups",
+                                        value: "industryGroups",
+                                        groupName: "chartCategories",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "industrySectors",
+                                        label: "Industry Sectors",
+                                        value: "industrySectors",
+                                        groupName: "chartCategories",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myFormGroupRadiobutton",
+                                    options: {
+                                        id: "securityTypes",
+                                        label: "Security Types",
+                                        value: "securityTypes",
+                                        groupName: "chartCategories",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        type: "mySpan",
+                        options: {
+                            klass: "",
+                            children: [
+                                {
+                                    type: "myButton",
+                                    options: {
+                                        buttonText: "OK",
+                                        click: function (context) {
+                                            window.open("http://localhost:3000/report/-3939;reportType=Portfolio", "Portfolio");
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myButton",
+                                    options: {
+                                        buttonText: "Help",
+                                        click: function (context) {
+
+                                        }
+                                    }
+                                },
+                                {
+                                    type: "myButton",
+                                    options: {
+                                        buttonText: "Cancel",
                                         click: function (context) {
 
                                         }
@@ -587,7 +815,6 @@ export class ReplangService {
             }
         }
     }
-
 
     public getSummaryConfirmation(): string {
         this._rep.getSecuritySymbolsByType("rockets");
@@ -1101,30 +1328,4 @@ export class ReplangService {
         }
     }
 
-
 }
-
-
-
-
-/* export class SampleViewComponent {
-    public isRequesting: boolean;
-    public items: Array<any>;
-
-    constructor(private apiService: ApiService) {
-        this.refresh();
-    }
-
-    public refresh(): void {
-        this.isRequesting = true;
-        this.apiService.sampleHttpGetRequest()
-            .subscribe(
-            result => this.items = result,
-            () => this.stopRefreshing(),
-            () => this.stopRefreshing());
-    }
-
-    private stopRefreshing() {
-        this.isRequesting = false;
-    }
-} */

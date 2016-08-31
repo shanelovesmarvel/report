@@ -13,6 +13,6 @@ project: *npm install webpack --save-dev*
 if you finished above tools, then you can run npm install to get library you needed.   
 *npm install*    
 
-5 npm start
+5. npm start
 
 

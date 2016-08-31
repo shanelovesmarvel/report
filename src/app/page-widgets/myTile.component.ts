@@ -65,22 +65,21 @@ export class MyTileComponent implements OnChanges {
     }
 
     ngOnChanges(){
-
+        console.info(this.options);
+        
         let tileData = this.options.data;
-        console.log("tile tile tile");
-        console.log(tileData);
 
          for(let i=0; i<this.options.tileBody.options.children.length; i++) {
              let child = this.options.tileBody.options.children[i];
-             
-             let tileDataContext = tileData;
-             let data = this.options.data.items[i];
+             console.warn("i = " + i);
+             console.warn(child);
+             console.warn(tileData);
+             let data = tileData.items[i];
              let service = this.options.service;
 
-             child.options.dataContext = tileDataContext.bindingContext;
+             child.options.dataContext = tileData.bindingContext;
              child.options.data = data;
              child.options.service = service;
-             console.log( child );
          }
     }
 

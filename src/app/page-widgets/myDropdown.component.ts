@@ -23,8 +23,6 @@ export class MyDropdownComponent implements OnChanges {
     }
 
     ngOnChanges(){
-        console.log( this );
-
         for(var memberName in this.options.service ){
             console.log( memberName);
             if( this.options[ memberName] instanceof Function ){

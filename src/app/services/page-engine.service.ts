@@ -61,8 +61,18 @@ export class PageEngineService {
             return that._replangService.getPortfolioSummaryChartUILayout();
         }
 
+        let getPortfolioSummaryConfirmUILayout = function() {
+            return that._replangService.getPortfolioSummaryConfirmUILayout();
+        }
+
+        let getPortfolioSummaryChartCategoriesUILayout = function(){
+            return that._replangService.getPortfolioSummaryChartCategoriesUILayout();
+        }
+
         service.getPortfolioSummaryData = getPortfolioSummaryData.bind(this);
         service.getPortfolioSummaryChartUILayout = getPortfolioSummaryChartUILayout.bind(this);
+        service.getPortfolioSummaryConfirmUILayout = getPortfolioSummaryConfirmUILayout.bind(this);
+        service.getPortfolioSummaryChartCategoriesUILayout = getPortfolioSummaryChartCategoriesUILayout.bind(this);
 
         let result = {
             data: data,
@@ -1130,7 +1140,6 @@ export class PageEngineService {
         let data = [
             null,
             null,
-
             // card
             {
                 items: [
@@ -1253,7 +1262,7 @@ export class PageEngineService {
                                                                                 rowIndex: 0,
                                                                                 columnIndex: 0,
                                                                                 controlId: "PortfolioCode",
-                                                                                label: "Portfolio Code",
+                                                                                label: item.PortfolioCode,
                                                                                 value: "13f",
                                                                                 disabled: true
                                                                             }

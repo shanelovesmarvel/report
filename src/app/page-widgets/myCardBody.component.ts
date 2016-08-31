@@ -39,7 +39,7 @@ export class MyCardBodyComponent implements OnChanges {
     }
 
     ngOnChanges(){
-        console.log( this.options.data );
+        //console.log( this.options.data );
         for(let i=0; i<this.options.children.length; i++) {
             let tile = this.options.children[i];
             let data = this.options.data.items[i];
@@ -49,7 +49,7 @@ export class MyCardBodyComponent implements OnChanges {
             tile.options.service = service;
 
             //console.log('................Card Body.......................');
-            console.log( data );
+            //console.log( data );
         }
     }
 

@@ -96,12 +96,13 @@ export class MyDivComponent implements OnChanges {
     }
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
+        console.warn(this.options);
         for (let propName in changes) {
             let chng = changes[propName];
             let cur = chng.currentValue;
             let prev = chng.previousValue;
             
-            console.log(`property name: ${propName}, previous value: ${prev}, current value: ${cur}`);
+            //console.log(`property name: ${propName}, previous value: ${prev}, current value: ${cur}`);
         }
     }
 }
