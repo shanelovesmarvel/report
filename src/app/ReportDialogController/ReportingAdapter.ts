@@ -115,6 +115,7 @@ export class DialogAdapter{
     private static LoadMyReport(repname: string, descName: string): any{
         reps.InitInstance();
         let repJson = reps.LoadReport(repname,descName);
+        console.warn(repJson);
         return this.FixforUI(repJson);
     }
 

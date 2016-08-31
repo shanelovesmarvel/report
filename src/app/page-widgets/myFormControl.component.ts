@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import {  Router } from '@angular/router';
 
 @Component({
     selector: 'my-form-control',
@@ -36,6 +37,16 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 export class MyFormControlComponent {
     @Input() options: any;
     @Input() pageContext: any;
-    constructor() {
+    constructor(){//private _router: Router) {
+    }
+    clickHandler() {
+        let context = this.options;
+        if( !context.service ){
+            context.service = {};
+        }
+
+        //context.service.router = this._router;
+        this.options.click( this );
+    
     }
 }

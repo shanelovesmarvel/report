@@ -16,13 +16,15 @@ export class NotifiMessage {
 
     receiveMessage(message: any){
         if(message.options.dialog === 'Report_Setting'){
+            console.warn('Receive message in setting');
             rep8.SettingDlgProc(message);
         }
         else if(message.options.dialog === 'portfolio_chart'){
-            console.warn('in chart');
+            console.warn('Receive message in chart');
             rep8.ChartDlgProc(message);
         }
         else{
+            console.warn('Receive message in Dynamic common dialog');
             rep8.DialogProc(message);
         }
     }
