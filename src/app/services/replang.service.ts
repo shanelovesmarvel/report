@@ -6,6 +6,8 @@ import { RepService } from './rep';
 import { Observable } from 'rxjs';
 
 import { AppraisalParm } from '../model/appraisal.parm.model';
+import { NotifiMessage } from '../ReportDialogController/NotifiMessage';
+import { DialogAdapter } from '../ReportDialogController/ReportingAdapter';
 
 
 function detectValue(appraisalParm) {
@@ -31,8 +33,9 @@ function detectTitle(appraisalParm) {
 @Injectable()
 export class ReplangService {
 
-    constructor(private _transporter: TransporterService,
-        private _rep: RepService) {
+    constructor(private _transporter: TransporterService, 
+                private _rep: RepService,
+                private _notify: NotifiMessage) {
     }
 
     public ssrsData: any;
@@ -827,6 +830,7 @@ export class ReplangService {
     }
 
     public getSummaryReportUILayout(): Object {
+        let that = this;
         return {
             type: "myDialog",
             options: {
@@ -892,15 +896,7 @@ export class ReplangService {
                                                     label: "Date",
                                                     id: "date"
                                                 }
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    type: "mySection",
-                                    options: {
-                                        klass: "section",
-                                        children: [
+                                            },
                                             {
                                                 type: "myFormGroupCheckbox",
                                                 options: {
@@ -925,6 +921,97 @@ export class ReplangService {
                                                         context.pageContext.ui.children.push(chartDialog);
                                                         context.options.modal = "modal";
                                                         context.options.target = "#portfolio_summary_chart";
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                type: "myTitle",
+                                                options: {
+                                                    title: "Calculate Performance",
+                                                    name: "calcType",
+                                                    level: 6
+                                                }
+                                            },
+                                            {
+                                                type: "myFormGroupRadiobutton",
+                                                options: {
+                                                    id: "netoffee",
+                                                    label: "Net of Fee",
+                                                    value: "netoffee",
+                                                    groupName: "calcType",
+                                                    name: "netoffee",
+                                                    dtlID: 511,
+                                                    dtilStyle: 83886082,
+                                                    dialog: "dialog",
+                                                    click: function (context) {
+                                                        var accfee = context.pageContext.service.findControl("accfee");
+                                                        //accfee.options.disabled = true;
+                                                        //context.pageContext.children
+                                                        that._notify.sendMessage(context);
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                type: "myFormGroupRadiobutton",
+                                                options: {
+                                                    id: "grossoffee",
+                                                    label: "Gross of Fee",
+                                                    value: "grossoffee",
+                                                    groupName: "calcType",
+                                                    name: "grossoffee",
+                                                    dtlID: 512,
+                                                    dtilStyle: 83886082,
+                                                    dialog: "dialog",
+                                                    click: function (context) {
+                                                        that._notify.sendMessage(context);
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                type: "myFormGroupCheckbox",
+                                                options: {
+                                                    id: "accfee",
+                                                    label: "Acc Fee",
+                                                    disabled: false,
+                                                    value: "accfee",
+                                                    name: "accfee",
+                                                    dtlID: 511,
+                                                    click: function (context) {                                                      
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                type: "myFormGroupDropdown",
+                                                options: {
+                                                    id: "sectype",
+                                                    label: "Security Type",
+                                                    disabled: false,
+                                                    name: "sectype",
+                                                    dtlID: 520,
+                                                    dtilStyle: 268438144,
+                                                    dialog: "dialog",
+                                                    click: function (context) {
+                                                        that._notify.sendMessage(context);
+                                                    },
+                                                    onchange: function (event) {                                                    
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                type: "myFormGroupDropdown",
+                                                options: {
+                                                    id: "secsymbol",
+                                                    label: "Security Symbol",
+                                                    disabled: false,
+                                                    name: "secsymbol",
+                                                    dtlID: 521,
+                                                    dtilStyle: 268438144,
+                                                    dialog: "dialog",
+                                                    click: function (context) {
+                                                        that._notify.sendMessage(context);  
+                                                    },
+                                                    onchange: function (event) {
+
                                                     }
                                                 }
                                             }
