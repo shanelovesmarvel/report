@@ -184,6 +184,10 @@ export function DialogProc(message: any){
                 }
 				//console.warn(message.pageContext.ui.);
                 break;
+			case 401:
+				var chartOptions = message.pageContext.service.getPortfolioSummaryChartUILayout();
+				message.pageContext.ui.children.push(chartOptions);
+				break;
             case 502:
                 message.options.items = ReportingData.getPortfoliolist();
                 break;
