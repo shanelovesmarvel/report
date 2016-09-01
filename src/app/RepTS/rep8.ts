@@ -1,4 +1,5 @@
 import { ReportingData } from '../data/ReportingData';
+import * as repadds from '../RepTS/repadds';
 
 export class ReportDialog {
 	m_MYDLGTEMPLATE: MYDLGTEMPLATE; // replace with direct members
@@ -225,4 +226,8 @@ export function DialogProc(message: any){
                 console.warn(message);
                 break;
         }
+}
+
+export function AdvStdButton(id: number): boolean {
+	return id === repadds.IDOK || id === repadds.IDCANCEL || id === repadds.IDREPHELP || id === repadds.IDCONS || id === repadds.IDBROWSE || id === repadds.IDSENS || id === repadds.IDBACK || id === repadds.IDNEXT || id === repadds.IDCANCELBN;
 }

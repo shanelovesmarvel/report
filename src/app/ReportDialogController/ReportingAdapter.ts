@@ -2,6 +2,7 @@ import * as rep9 from '../RepTS/rep9';
 import * as rep8 from '../RepTS/rep8';
 import * as reps from '../RepTS/reps';
 
+
 export class controlOption{
     id: string;
     label: string;
@@ -39,7 +40,7 @@ export class BaseControl{
 
 export class DialogAdapter{
     
-    public static getmyControl(repDLG: rep8.ReportDialog, index: number, result: BaseControl, repECD: rep8.ECD): boolean{
+    public static getmyControl(repDLG: rep8.ReportDialog, index: number, result: BaseControl, repECD?: rep8.ECD): boolean{
         //let result: BaseControl = new BaseControl();
         result.options.dtilID = repDLG.m_DLGITEMTEMPLATE[index].dtilID;
         let dtilText: string = repDLG.m_DLGITEMTEMPLATE[index].dtilText.replace('&','');
@@ -56,12 +57,15 @@ export class DialogAdapter{
             }
         }
         else if(repDLG.m_DLGITEMTEMPLATE[index].dtilClass.toUpperCase() === 'BUTTON'){
-            if(dtilText.toUpperCase() === "OK" ||
+            if(
+                rep8.AdvStdButton(repDLG.m_DLGITEMTEMPLATE[index].dtilID)
+                /*dtilText.toUpperCase() === "OK" ||
                 dtilText.toUpperCase() === 'CANCEL' ||
                 dtilText.toUpperCase() === 'HELP' ||
                 dtilText.toUpperCase() === 'SETTINGS' ||
                 dtilText.toUpperCase() === 'CONSOLIDATE' ||
-                dtilText.toUpperCase() === 'BROWSE'){
+                dtilText.toUpperCase() === 'BROWSE'*/
+                ){
                     result.isInbody = false;
                     result.type = 'myDialogButton';
                     result.options.id = dtilText + repDLG.m_DLGITEMTEMPLATE[index].dtilClass;//'myDialogButton';
@@ -142,6 +146,9 @@ export class DialogAdapter{
                 myControl.options.name = dlgarray[DIndex].dtilText.replace(' ','');
                 groupname = myControl.options.name;
                 grounumber = dlgarray[DIndex].groupNumber;
+            }
+            else if(dlgarray[DIndex].dtilClass.toUpperCase() === 'BUTTON' && rep8.AdvStdButton(dlgarray[DIndex].dtilID)){
+                this.getmyControl(repDLG, DIndex, myControl);
             }
             else{
                 let cEcd: Array<rep8.ECD> = ECDArray.filter((re) => re.id === dtilID);
