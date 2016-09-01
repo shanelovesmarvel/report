@@ -11,13 +11,9 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
         </a>
         <ul class="pull-md-left">
             <li><a class="nav-link nav-item" [routerLink]="['/']"> Home |</a></li>
-            <li *ngIf="false"><a class="nav-link nav-item" [routerLink]="['/index', -4034]">Portfolio</a></li>
-            <li *ngIf="false"><a class="nav-link nav-item" [routerLink]="['/index', -4222]">Index</a></li>
-            <li *ngIf="false"><a class="nav-link nav-item" [routerLink]="['/index', -4114]">Asset Class</a></li>
-            <li *ngIf="false"><a class="nav-link nav-item" href="#">Help</a></li>
-            <li><a class="nav-link nav-item" [routerLink]="['/report', -3931]">Dialog |</a></li>
-            <li><a class="nav-link nav-item" [routerLink]="['/report', -3979]">SSRS |</a></li>
-            <li><a class="nav-link nav-item" [routerLink]="['/report', -3973]">Portfolio Summary</a></li>
+            <li><a class="nav-link nav-item" [routerLink]="['/report', -3931]">Report Dialogs |</a></li>
+            <li><a class="nav-link nav-item" [routerLink]="['/report', -3979]">SSRS Page |</a></li>
+            <li><a class="nav-link nav-item" [routerLink]="['/report', -3973]">Portfolio Summary Page</a></li>
             <li *ngIf="false"><a class="nav=link nav-item" [routerLink]="['/report', -3939]">Output</a></li>
         </ul>
         <ul class="pull-md-right">

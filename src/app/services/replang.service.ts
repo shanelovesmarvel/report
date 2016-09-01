@@ -39,15 +39,7 @@ export class ReplangService {
     }
 
     public ssrsData: any;
-
-    public getPortfolioSummaryData(dialogType: string): Object {
-        if (dialogType === "summary") {
-            return this._transporter.getSummaryData();
-        } else if (dialogType == "reorg") {
-            return this._transporter.getReorgData();
-        }
-    }
-
+    
     public getSSRSData(): any {
         this._transporter.getSSRSData().subscribe((res: any) => {
             this.ssrsData = res;

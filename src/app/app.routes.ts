@@ -19,7 +19,6 @@ const routes = [
   { path: "", component: AppComponent, children:[
      // { path: '', redirectTo: '/app/contact-list', pathMatch: 'full' },   
      { path: "", component: HomeComponent, terminal: true },
-     { path: "index/:pageId", component: PageEngineComponent }, 
      { path: "report/:pageId", component: PageEngineComponent }
   ]}
 ];

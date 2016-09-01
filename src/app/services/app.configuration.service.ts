@@ -4,13 +4,11 @@ import { ApplicationPipeline } from './application-pipeline.service';
 @Injectable()
 export class ConfigurationService {
     constructor( private _appPipeline: ApplicationPipeline ) {
-        console.log('............................................................');
         this.registerOnAppInit();
     }
 
     public registerOnAppInit(){
 
-        console.log('registing configuration service.');
         let promise = new Promise(function( resolve, reject ){
             setTimeout( function(){
                 console.log("configuration service initialization resolved.");

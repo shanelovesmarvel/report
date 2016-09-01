@@ -4,7 +4,6 @@ import { ApplicationPipeline } from './application-pipeline.service';
 @Injectable()
 export class ApplicationPipelinePageService {
     constructor( private _appPipeline: ApplicationPipeline ) {
-        console.log('********************************************');
         this.registerOnPageRecognizedEvent();
     }
 

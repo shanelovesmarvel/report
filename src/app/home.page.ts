@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'contacts-list',
   template: `
-    <h2>Welcome to Report Engine!</h2>
+    <h2>Welcome to APX Report Demo!</h2>
   `
 })
 export class HomeComponent implements OnInit {

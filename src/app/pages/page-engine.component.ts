@@ -9,17 +9,12 @@ import { ReplangService } from '../services/replang.service';
 import { TransporterService } from '../services/transporter.service'; 
 import { RepService } from '../services/rep';
 import { NotifiMessage } from '../ReportDialogController/NotifiMessage';
-import { PageBuilder } from '../services/page.builder';
-import { PageDataFactory } from '../services/page.data.factory';
-import { PageUIConfigFactory } from '../services/page.uiconfig.factory';
-import { PageUIFactory } from '../services/page.ui.factory';
-import { PageServiceFactory } from '../services/page.service.factory';
 
 @Component({
     selector: 'contentSelector',
     directives: [MyDivComponent],
-    providers: [EngineService, PageEngineService, PageBuilder, PageDataFactory, PageUIConfigFactory, PageUIFactory, 
-               PageServiceFactory, ReplangService, TransporterService, RepService, NotifiMessage],
+    providers: [EngineService, PageEngineService, 
+                ReplangService, TransporterService, RepService, NotifiMessage],
     template: `<my-div [options]="options"></my-div>`
 })
 export class PageEngineComponent implements OnInit, OnDestroy {
@@ -29,8 +24,7 @@ export class PageEngineComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _route: ActivatedRoute, 
         private _engineService: EngineService,
-        private _pageEngineService: PageEngineService,
-        private _pageBuilder: PageBuilder
+        private _pageEngineService: PageEngineService
         ) {
     }
 
