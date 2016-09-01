@@ -4,6 +4,7 @@ import * as reps from '../RepTS/reps';
 
 
 export class controlOption{
+    dialogId: string;
     id: string;
     label: string;
     title: string;
@@ -20,8 +21,16 @@ export class controlOption{
     groupName: string;
     level: number;
     name: string;
+    messageID: number;
+    klass: string;
+    children: Array<BaseControl>;
+    body: Array<BaseControl>;
+    footer: Array<BaseControl>;
     constructor(){
         this.beforeGroup = -1;
+        this.children = [];
+        this.body = [];
+        this.footer = [];
     }
 }
 
@@ -37,6 +46,7 @@ export class BaseControl{
         this.options = new controlOption();
     }
 }
+
 
 export class DialogAdapter{
     
@@ -70,6 +80,7 @@ export class DialogAdapter{
                     result.type = 'myDialogButton';
                     result.options.id = dtilText + repDLG.m_DLGITEMTEMPLATE[index].dtilClass;//'myDialogButton';
                     result.options.label = dtilText;
+                    result.options.messageID = repDLG.m_DLGITEMTEMPLATE[index].dtilID;
             }
             else{
                 result.isInbody = true;
@@ -125,6 +136,45 @@ export class DialogAdapter{
         let repJson = reps.LoadReport(repname,descName);
         console.warn(repJson);
         return this.FixforUI(repJson);
+    }
+
+    public static getUILayout(myControls: Array<BaseControl>, repDLG: rep8.ReportDialog): any{
+        let rootcontrol: BaseControl = new BaseControl();
+        rootcontrol.isInbody = true;
+        rootcontrol.type = 'myDialog';
+        let title: string = repDLG.m_MYDLGTEMPLATE.caption;
+        rootcontrol.options.title = title;
+        while(1){
+            if(title.indexOf(' ')!=-1){
+                title = title.replace(' ', '_');
+            }
+            else{
+                break;
+            }
+        }
+        rootcontrol.options.dialogId = title;
+        rootcontrol.options.id = title;
+
+        let footcontrol: Array<BaseControl> = myControls.filter((bc)=>bc.isInbody === false);
+        let bodycontrol: Array<BaseControl> = myControls.filter((bc)=>bc.isInbody === true);
+
+        let digObj: BaseControl = new BaseControl();
+        digObj.type = 'myDialogBody';
+        
+        let secObj: BaseControl = new BaseControl();
+        secObj.type = 'mySection';
+        secObj.options.klass = 'section';
+        for(let i: number = 0; i < bodycontrol.length; i++){
+            secObj.options.children.push(bodycontrol[i]);
+        }
+        digObj.options.children.push(secObj);
+        rootcontrol.options.body.push(digObj);
+        for(let i: number = 0; i < footcontrol.length; i++){
+            rootcontrol.options.footer.push(footcontrol[i]);
+        }
+        console.warn(JSON.stringify(rootcontrol));
+        //console.warn(rootcontrol);
+        return rootcontrol;
     }
 
     private static FixforUI(repDLG: rep8.ReportDialog): any{
@@ -188,9 +238,10 @@ export class DialogAdapter{
             myControls.push(myControl);
             tempStack = [];
         }
-        for(let aIndex: number = 0; aIndex<myControls.length; aIndex++){
-            console.warn(myControls[aIndex]);
-        }
+        //for(let aIndex: number = 0; aIndex<myControls.length; aIndex++){
+        //    console.warn(myControls[aIndex]);
+        //}
+        return this.getUILayout(myControls,repDLG);
         /*
         let mytempControls: Array<BaseControl> = [];
         let myControls: Array<BaseControl> = [];

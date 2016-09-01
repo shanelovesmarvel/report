@@ -878,8 +878,9 @@ export class ReplangService {
     }
 
     public getSummaryReportUILayout(): Object {
-        let repDLG = DialogAdapter.getrepJSON('psum','Portfolio summary');
         let that = this;
+        //return DialogAdapter.getrepJSON('psum','Portfolio summary');
+
         return {
             type: "myDialog",
             options: {
@@ -1141,6 +1142,7 @@ export class ReplangService {
                 ]
             }
         }
+        
     }
 
     public getSummaryChartUILayout(): Object {
