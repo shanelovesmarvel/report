@@ -54,7 +54,7 @@ template: `
         <my-form-group-editbox *ngIf="d.type === 'myFormGroupTextbox' " [options] = d.options>
         </my-form-group-editbox>
 
-        <my-navbar *ngIf="d.type === 'myNavbar' " [options] = d.options >
+        <my-navbar *ngIf="d.type === 'myNavbar' " [options] = d.options [pageContext] = "pageContext">
         </my-navbar>
 
     </span>

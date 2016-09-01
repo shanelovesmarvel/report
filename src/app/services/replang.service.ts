@@ -107,9 +107,19 @@ export class ReplangService {
                     {
                         type: "myNavbar",
                         options: {
-                            click: function () {
-                                if (!isDialog) {
+                            click: function (context) {
+                                if (isDialog) {
                                     window.open("http://localhost:3000/report/-3939;reportType=SSRS", "SSRS");
+                                } else {
+                                    var outputSection = context.pageContext.service.findControl("outputSection");
+                                    outputSection.options.children = [];
+                                    outputSection.options.children.push({
+                                        type: "myTitle",
+                                        options: {
+                                            title: "SSRS Report Output",
+                                            level: 3
+                                        }
+                                    })
                                 }
                             }
                         }
@@ -162,6 +172,7 @@ export class ReplangService {
             options: {
                 isHidden: isDialog,
                 klass: "section-loading-form",
+                id: "outputSection",
                 children: [
                     {
                         
@@ -797,11 +808,11 @@ export class ReplangService {
                                     options: {
                                         buttonText: "OK",
                                         click: function (context) {
-                                            //window.open("http://localhost:3000/report/-3939;reportType=Portfolio", "Portfolio");
                                             var categoriesSection = context.pageContext.service.findControl("portfolioSummaryChartCategories");
                                             ($("#" + categoriesSection.options.id) as any).removeClass("fadeInRightCate");
                                             ($("#" + categoriesSection.options.id) as any).addClass("fadeOutRightCate");
-                                            
+                                            var outputSection = context.pageContext.service.getPortfolioSummaryOutput();
+                                            context.pageContext.ui.children.push(outputSection);                                          
                                         }
                                     }
                                 },
@@ -838,14 +849,40 @@ export class ReplangService {
         }
     }
 
+    public getPortfolioSummaryOutput(): Object {
+        return {
+            type: "mySection",
+            options: {
+                klass: "section-output",
+                id: "porfolioSummaryOutput",
+                children: [
+                    {
+                        type: "myTitle",
+                        options: {
+                            title: "Portfolio Summary Report Output",
+                            level: 3
+                        }
+                    },
+                    {
+                        type: "myTitle",
+                        options: {
+                            title: ".......................................",
+                            level: 5
+                        }
+                    }
+                ]
+            }
+        }
+    }
+
     public getSummaryConfirmation(): string {
         this._rep.getSecuritySymbolsByType("rockets");
         let result: string = "";
         this._rep.securitySymbols().subscribe((res: any) => {
             result = res;
         });
-        return result;
-        //return "Prices are not avaliable for 12/31/2016. Do you wish to continue to run this report ?";
+        //return result;
+        return "Prices are not avaliable for 12/31/2016. Do you wish to continue to run this report ?";
     }
 
     public getSummaryReportUILayout(): Object {
@@ -1350,6 +1387,7 @@ export class ReplangService {
             }
         }
     }
+
 
     public getSummaryChartCategoriesUILayout(): Object {
         return {

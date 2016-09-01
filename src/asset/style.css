@@ -163,6 +163,7 @@ footer > ul > li {
 
 .section-loading-form {
     margin-top: 10px;
+    padding: 10px;
     border: 2px solid gray;
     height: 75%;
 }
@@ -573,4 +574,13 @@ footer > ul > li {
         top: 0;
         opacity: 0;
     }
+}
+
+.section-output {
+    border: 1px solid grey;
+    width: 85%;
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    height: 650px;
 }

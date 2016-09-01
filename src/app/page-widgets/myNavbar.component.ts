@@ -28,7 +28,10 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
             </ul>
             <ul class="pull-sm-right">
                 <li>
-                    <button class="btn btn-primary btn-md" (click)="clickHandler()">Run</button>
+                    <button class="btn btn-primary btn-md" data-toggle="collapse" 
+                            data-target="#portfolio_appraisal,#portfolio_settings"
+                            aria-expanded="true" aria-controls="portfolio_appraisal, portfolio_settings" 
+                            (click)="clickHandler()">Run</button>
                 </li>
             </ul>
         </div>
@@ -37,6 +40,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 })
 export class MyNavbarComponent {
     @Input() options: any;
+    @Input() pageContext: any;
     constructor() {
     }
 

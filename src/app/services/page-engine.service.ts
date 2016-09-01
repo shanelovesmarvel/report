@@ -69,10 +69,15 @@ export class PageEngineService {
             return that._replangService.getPortfolioSummaryChartCategoriesUILayout();
         }
 
+        let getPortfolioSummaryOutput = function(){
+            return that._replangService.getPortfolioSummaryOutput();
+        }
+
         service.getPortfolioSummaryData = getPortfolioSummaryData.bind(this);
         service.getPortfolioSummaryChartUILayout = getPortfolioSummaryChartUILayout.bind(this);
         service.getPortfolioSummaryConfirmUILayout = getPortfolioSummaryConfirmUILayout.bind(this);
         service.getPortfolioSummaryChartCategoriesUILayout = getPortfolioSummaryChartCategoriesUILayout.bind(this);
+        service.getPortfolioSummaryOutput = getPortfolioSummaryOutput.bind(this);
 
         let result = {
             data: data,
