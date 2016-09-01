@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { AppraisalParm } from '../model/appraisal.parm.model';
 import { NotifiMessage } from '../ReportDialogController/NotifiMessage';
 import { DialogAdapter } from '../ReportDialogController/ReportingAdapter';
-
+import { ReportingData } from '../data/ReportingData';
 
 function detectValue(appraisalParm) {
     if (appraisalParm.ParmSectionID === "1") {
@@ -182,8 +182,15 @@ export class ReplangService {
                 value: detectValue(appraisalParm),
                 IsRequired: appraisalParm.IsRequired,
                 items: [],
-                click: function () {
-
+                //We may need a common function to process the command
+                click: function (context) {
+                    if(context.options.title === 'Portfolio *'){
+                        context.options.items = ReportingData.getPortfoliolist();
+                    }
+                    else if (context.options.title === 'Reporting Currency *'){
+                        context.options.items = ReportingData.getReportingCurrencyList();
+                    }
+                    console.warn(context);
                 },
                 onchange: function () {
 
@@ -842,6 +849,7 @@ export class ReplangService {
     }
 
     public getSummaryReportUILayout(): Object {
+        let repDLG = DialogAdapter.getrepJSON('psum','Portfolio summary');
         let that = this;
         return {
             type: "myDialog",
@@ -874,9 +882,12 @@ export class ReplangService {
                                                     label: "Portfolio",
                                                     disabled: false,
                                                     name: "portfolioDropdown",
+                                                    dtlID: 502,
                                                     click: function (context) {
-                                                        var portfolio = context.pageContext.service.findControl("portfolioDropdown");
-                                                        portfolio.options.items = context.pageContext.data[1].portfolio;
+                                                        console.warn('Send message for portfolio list');
+                                                        that._notify.sendMessage(context);
+                                                        //var portfolio = context.pageContext.service.findControl("portfolioDropdown");
+                                                        //portfolio.options.items = context.pageContext.data[1].portfolio;
                                                     },
                                                     onchange: function (value) {
                                                         console.warn(value);
@@ -891,11 +902,14 @@ export class ReplangService {
                                                     label: "Reporting Currency",
                                                     disabled: false,
                                                     name: "currencyDropdown",
+                                                    dtlID: 510,
                                                     click: function (context) {
-                                                        var portfolio = context.pageContext.service.findControl("portfolioDropdown");
-                                                        console.warn(portfolio.options.selectedIndex);
-                                                        var currency = context.pageContext.service.findControl("currencyDropdown");
-                                                        currency.options.items = context.pageContext.data[1].currency;
+                                                        console.warn('Send message for Reporting Currency');
+                                                        that._notify.sendMessage(context);
+                                                        //var portfolio = context.pageContext.service.findControl("portfolioDropdown");
+                                                        //console.warn(portfolio.options.selectedIndex);
+                                                        //var currency = context.pageContext.service.findControl("currencyDropdown");
+                                                        //currency.options.items = context.pageContext.data[1].currency;
                                                     },
                                                     onchange: function (value) {
                                                         console.warn(value);
@@ -927,12 +941,15 @@ export class ReplangService {
                                                     label: "Chart",
                                                     disabled: false,
                                                     value: "chart",
+                                                    dtlID: 400,
                                                     click: function (context) {
+                                                        console.warn('Send message for chart');
                                                         context.checked = !context.checked;
-                                                        var chartDialog = context.pageContext.service.getSummaryChartUILayout();
-                                                        context.pageContext.ui.children.push(chartDialog);
-                                                        context.options.modal = "modal";
-                                                        context.options.target = "#portfolio_summary_chart";
+                                                        that._notify.sendMessage(context);
+                                                        //var chartDialog = context.pageContext.service.getSummaryChartUILayout();
+                                                        //context.pageContext.ui.children.push(chartDialog);
+                                                        //context.options.modal = "modal";
+                                                        //context.options.target = "#portfolio_summary_chart";
                                                     }
                                                 }
                                             },
@@ -956,10 +973,11 @@ export class ReplangService {
                                                     dtilStyle: 83886082,
                                                     dialog: "dialog",
                                                     click: function (context) {
-                                                        var accfee = context.pageContext.service.findControl("accfee");
+                                                        //var accfee = context.pageContext.service.findControl("accfee");
                                                         //accfee.options.disabled = true;
                                                         //context.pageContext.children
                                                         that._notify.sendMessage(context);
+                                                        console.warn('Send message : net of fee');
                                                     }
                                                 }
                                             },
@@ -976,6 +994,7 @@ export class ReplangService {
                                                     dialog: "dialog",
                                                     click: function (context) {
                                                         that._notify.sendMessage(context);
+                                                        console.warn('Send message : Gross of fee');
                                                     }
                                                 }
                                             },
@@ -1004,6 +1023,7 @@ export class ReplangService {
                                                     dialog: "dialog",
                                                     click: function (context) {
                                                         that._notify.sendMessage(context);
+                                                        console.warn('Send message : sec type');
                                                     },
                                                     onchange: function (event) {                                                    
                                                     }
@@ -1020,7 +1040,8 @@ export class ReplangService {
                                                     dtilStyle: 268438144,
                                                     dialog: "dialog",
                                                     click: function (context) {
-                                                        that._notify.sendMessage(context);  
+                                                        that._notify.sendMessage(context);
+                                                        console.warn('Send message : sec Symbol');
                                                     },
                                                     onchange: function (event) {
 
@@ -1081,8 +1102,10 @@ export class ReplangService {
                         type: "myDialogButton",
                         options: {
                             buttonText: "Settings",
+                            dtlID: 100,
+                            backdrop: "static",
                             click: function (context) {
-
+                                that._notify.sendMessage(context);
                             }
                         }
                     }
@@ -1092,10 +1115,11 @@ export class ReplangService {
     }
 
     public getSummaryChartUILayout(): Object {
+        let that = this;
         return {
             type: "myDialog",
             options: {
-                dialogId: "portfolio_summary_chart",
+                dialogId: "myportfolio_chart",
                 title: "Report: Chart Options",
                 body: [
                     {
@@ -1121,7 +1145,10 @@ export class ReplangService {
                                                     label: "Pie",
                                                     value: "pie",
                                                     groupName: "chartType",
+                                                    dialog: 'portfolio_chart',
                                                     click: function (context) {
+                                                        that._notify.sendMessage(context);
+                                                        console.warn('send message for pie');
                                                         var _3d = context.pageContext.service.findControl("3dCheck");
                                                         var _comLables = context.pageContext.service.findControl("labelCheck");
                                                         var _gridLines = context.pageContext.service.findControl("lineCheck");
@@ -1139,8 +1166,10 @@ export class ReplangService {
                                                     label: "Bar",
                                                     value: "bar",
                                                     groupName: "chartType",
+                                                    dialog: 'portfolio_chart',
                                                     click: function (context) {
-
+                                                        that._notify.sendMessage(context);
+                                                        console.warn('send message for bar');
                                                     }
                                                 }
                                             },
@@ -1151,8 +1180,10 @@ export class ReplangService {
                                                     label: "Column",
                                                     value: "column",
                                                     groupName: "chartType",
+                                                    dialog: 'portfolio_chart',
                                                     click: function (context) {
-
+                                                        that._notify.sendMessage(context);
+                                                        console.warn('send message for column');
                                                     }
                                                 }
                                             },
@@ -1163,7 +1194,10 @@ export class ReplangService {
                                                     label: "Line",
                                                     value: "line",
                                                     groupName: "chartType",
+                                                    dialog: 'portfolio_chart',
                                                     click: function (context) {
+                                                        that._notify.sendMessage(context);
+                                                        console.warn('send message for Line');
                                                         var _3d = context.pageContext.service.findControl("3dCheck");
                                                         var _comLables = context.pageContext.service.findControl("labelCheck");
                                                         var _gridLines = context.pageContext.service.findControl("lineCheck");
@@ -1427,4 +1461,87 @@ export class ReplangService {
         }
     }
 
+    public getSettingDialog(): Object{
+        let that = this;
+        return{
+            type: "myDialog",
+            options:{
+                dialogId: "Report_Setting",
+                title: "Settings",
+                body: [
+                    {
+                        type: "myDialogBody",
+                        options: {
+                            children:[{
+                                type: "mySection",
+                                options: {
+                                    klass: "section",
+                                    children: [
+                                        {                                    
+                                            type: "myFormGroupDropdown",
+                                            options: {
+                                                id: "MBS",
+                                                label: "MBS",
+                                                disabled: false,
+                                                name: "MBS",
+                                                dtlID: 600,
+                                                dtilStyle: 268438144,
+                                                dialog: "Report_Setting",
+                                                click: function (context) {
+                                                    that._notify.sendMessage(context);
+                                                },
+                                                onchange: function (event) {
+                                                }
+                                            }
+                                    },
+                                    {
+                                        type: "myFormGroupDropdown",
+                                        options: {
+                                            id: "TIPS",
+                                            label: "TIPS",
+                                            disabled: false,
+                                            name: "TIPS",
+                                            dtlID: 601,
+                                            dtilStyle: 268438144,
+                                            dialog: "Report_Setting",
+                                            click: function (context) {
+                                                that._notify.sendMessage(context);
+                                            },
+                                            onchange: function (event) {
+                                            }
+                                        }
+                                    },
+                                    {
+                                        type: "myFormGroupCheckbox",
+                                        options: {
+                                            label: "Override portfolio settings",
+                                            value: "icu",
+                                            dtlID: 500,
+                                            dialog: "Report_Setting",
+                                            disabled: false,
+                                            click: function (context) {
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                            }]
+                    }
+                }    
+                ],
+                footer:[  
+                    {
+                        type: "myDialogButton",//myDialogButton
+                        options: {
+                            buttonText: "OK",
+                            dialog: "Report_Setting",
+                            click: function (context) {
+
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+    }
 }

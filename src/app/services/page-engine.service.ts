@@ -175,12 +175,17 @@ export class PageEngineService {
             return that._replangService.getSSRSReportUILayout(true);
         }
 
+        let getSettingDialog = function(){
+            return that._replangService.getSettingDialog();
+        }
+
         // rebind this by bind.
         service.getSummaryConfirmUILayout = getSummaryConfirmUILayout.bind(this);
         service.getSummaryChartUILayout = getSummaryChartUILayout.bind(this);
         service.getSummaryUILayout = getSummaryUILayout.bind(this);
         service.getSummaryChartCategoriesUILayout = getSummaryChartCategoriesUILayout.bind(this);
         service.getSSRSUILayout = getSSRSUILayout.bind(this);
+        service.getSettingDialog = getSettingDialog.bind(this);
 
         let ui = {
             children: [
