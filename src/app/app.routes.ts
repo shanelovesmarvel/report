@@ -1,12 +1,12 @@
 import { provideRouter, Route } from "@angular/router";
 
-import { RootComponent } from './rootComponent';
-import { AppComponent } from './app.component';
+import { RootComponent } from './pages/rootComponent';
+import { AppComponent } from './pages/app.component';
 
-import { ApplicationLoadingComponent } from './application-loading.component';
-import { Page404Component } from './page404.component';
+import { ApplicationLoadingComponent } from './pages/application-loading.component';
+import { Page404Component } from './pages/page404.component';
 
-import { HomeComponent } from './home.page';
+import { HomeComponent } from './pages/home.page';
 import { PageEngineComponent } from './pages/page-engine.component';
 
 // http://victorsavkin.com/post/146722301646/angular-router-empty-paths-componentless-routes

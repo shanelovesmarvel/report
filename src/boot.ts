@@ -9,7 +9,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { bootstrap }      from '@angular/platform-browser-dynamic';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
-import { RootComponent } from './app/rootComponent';
+import { RootComponent } from './app/pages/rootComponent';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 import { ApplicationPipeline } from './app/services/application-pipeline.service';
 import { ConfigurationService } from './app/services/app.configuration.service';
