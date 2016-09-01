@@ -11,7 +11,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
         </a>
         <ul class="pull-md-left">
             <li><a class="nav-link nav-item" [routerLink]="['/']"> Home |</a></li>
-            <li><a class="nav-link nav-item" [routerLink]="['/index', -4034]">Portfolio</a></li>
+            <li *ngIf="false"><a class="nav-link nav-item" [routerLink]="['/index', -4034]">Portfolio</a></li>
             <li *ngIf="false"><a class="nav-link nav-item" [routerLink]="['/index', -4222]">Index</a></li>
             <li *ngIf="false"><a class="nav-link nav-item" [routerLink]="['/index', -4114]">Asset Class</a></li>
             <li *ngIf="false"><a class="nav-link nav-item" href="#">Help</a></li>

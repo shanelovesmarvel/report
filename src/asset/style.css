@@ -164,7 +164,7 @@ footer > ul > li {
 .section-loading-form {
     margin-top: 10px;
     border: 2px solid gray;
-    height: 300px;
+    height: 75%;
 }
 
 .section-form {
@@ -181,6 +181,8 @@ footer > ul > li {
     padding: 10px;
     width: 600px;
     margin: 0 auto;
+    overflow: hidden;
+    clear: both;
 }
 
 .form-checkbox-margin {
@@ -279,10 +281,12 @@ footer > ul > li {
 @keyframes fadeOutRight {
     from {
         left: 0;
+        top: 0px;
         opacity: 1;
     }
     to {
         left: 120px;
+        top: 0px;
         opacity: 0;
     }
 }
@@ -290,10 +294,12 @@ footer > ul > li {
 @-webkit-keyframes fadeOutRight {
     from {
         left: 0;
+        top: 0px;
         opacity: 1;
     }
     to {
         left: 120px;
+        top: 0px;
         opacity: 0;
     }
 }
@@ -309,28 +315,134 @@ footer > ul > li {
 
 @keyframes fadeInRight {
     from {
-        left: -120px;
-        top: -440px;
+        right: -120px;
+        top: -640px;
         opacity: 0;
     }
     to {
-        left: 120px;
-        top: -440px;
+        right: 0;
+        top: -640px;
         opacity: 1;
     }
 }
 
 @-webkit-keyframes fadeInRight {
     from {
-        left: -120px;
-        top: -440px;
+        right: -120px;
+        top: -640px;
         opacity: 0;
     }
     to {
-        left: 120px;
-        top: -440px;
+        right: 0;
+        top: -640px;
         opacity: 1;
     }
+}
+
+.fadeOutRightConfirm {
+    position: relative;
+    animation: fadeOutRightConfirm 2s 1 normal ease-out;
+    -webkit-animation: fadeOutRightConfirm 2s 1 normal ease-out;
+    animation-fill-mode: both;
+    animation-direction: alternate; 
+}
+
+@keyframes fadeOutRightConfirm {
+   from {
+        left: 0px;
+        top: -640px;
+        opacity: 1;
+    }
+    to {
+        left: 120px;
+        top: -640px;
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeOutRightConfirm {
+    from {
+        left: 0px;
+        top: -640px;
+        opacity: 1;
+    }
+    to {
+        left: 120px;
+        top: -640px;
+        opacity: 0;
+    }
+}
+
+.fadeOutRightCate {
+    position: relative;
+    animation: fadeOutRightCate 2s 1 normal ease-out;
+    -webkit-animation: fadeOutRightCate 2s 1 normal ease-out;
+    animation-fill-mode: both;
+    animation-direction: alternate; 
+}
+
+@keyframes fadeOutRightCate {
+   from {
+        left: 0px;
+        top: -840px;
+        opacity: 1;
+    }
+    to {
+        left: 120px;
+        top: -840px;
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeOutRightCate {
+    from {
+        left: 0px;
+        top: -840px;
+        opacity: 1;
+    }
+    to {
+        left: 120px;
+        top: -840px;
+        opacity: 0;
+    }
+}
+
+.fadeInRightCate {
+    position: relative;
+    animation: fadeInRightCate 2s 1 normal ease-out;
+    -webkit-animation: fadeInRightCate 2s 1 normal ease-out;
+    animation-fill-mode: both;
+    animation-direction: alternate; 
+}
+
+@keyframes fadeInRightCate {
+    from {
+        right: -120px;
+        top: -840px;
+        opacity: 0;
+    }
+    to {
+        right: 0;
+        top: -840px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInRightCate {
+    from {
+        right: -120px;
+        top: -840px;
+        opacity: 0;
+    }
+    to {
+        right: 0;
+        top: -840px;
+        opacity: 1;
+    }
+}
+
+.section-span {
+    float: right;
 }
 
 
@@ -338,8 +450,8 @@ footer > ul > li {
 
 .fadeOutUp {
     position: relative;
-    animation: fadeOutUp 1s 1 normal ease-out;
-    -webkit-animation: fadeOutUp 1s 1 normal ease-out;
+    animation: fadeOutUp 2s 1 normal ease-out;
+    -webkit-animation: fadeOutUp 2s 1 normal ease-out;
     animation-fill-mode: both;
     animation-direction: alternate;
 }
@@ -369,8 +481,8 @@ footer > ul > li {
 /***********animation - fade in and move up***************/
 .fadeInUp {
     position: relative;
-    animation: fadeInUp 1s 1 normal ease;
-    -webkit-animation: fadeInUp 1s 1 normal ease;
+    animation: fadeInUp 2s 1 normal ease;
+    -webkit-animation: fadeInUp 2s 1 normal ease;
     animation-fill-mode: both;
     animation-direction: alternate;
 }
@@ -398,11 +510,13 @@ footer > ul > li {
 }
 
 
+
+
 /***********animation - fade in and move down***************/
 .fadeInDown {
     position: relative;
-    animation: fadeInDown 3s 1 normal ease;
-    -webkit-animation: fadeInDown 3s 1 normal ease;
+    animation: fadeInDown 2s 1 normal ease;
+    -webkit-animation: fadeInDown 2s 1 normal ease;
     animation-fill-mode: both;
     animation-direction: alternate;
 }

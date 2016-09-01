@@ -343,7 +343,7 @@ export class ReplangService {
                                                         var chartOptions = context.pageContext.service.getPortfolioSummaryConfirmUILayout();
                                                         context.pageContext.ui.children.push(chartOptions);
                                                     } else {
-                                                        ($("#" + confirmSection.options.id) as any).removeClass("fadeOutLeft");
+                                                        ($("#" + confirmSection.options.id) as any).removeClass("fadeOutRightConfirm");
                                                         ($("#" + confirmSection.options.id) as any).addClass("fadeInRight");
                                                     }
                                                 }
@@ -584,7 +584,8 @@ export class ReplangService {
                                         buttonText: "OK",
                                         id: "confirmChartBtn",
                                         click: function (context) {
-                                            var chartSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
+                                            console.warn(context);
+                                            var chartSection = context.pageContext.service.findControl("portfolioSummaryChart");
                                             ($("#" + chartSection.options.id) as any).removeClass("fadeInUp");
                                             ($("#" + chartSection.options.id) as any).addClass("fadeOutDown");
                                             var summarySection = context.pageContext.service.findControl("portfolioSummary");
@@ -648,7 +649,7 @@ export class ReplangService {
                     {
                         type: "mySpan",
                         options: {
-                            klass: "",
+                            klass: "section-span",
                             children: [
                                 {
                                     type: "myButton",
@@ -658,14 +659,14 @@ export class ReplangService {
                                         click: function (context) {
                                             var confirmSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
                                             ($("#" + confirmSection.options.id) as any).removeClass("fadeInRight");
-                                            ($("#" + confirmSection.options.id) as any).addClass("fadeOutRight");
+                                            ($("#" + confirmSection.options.id) as any).addClass("fadeOutRightConfirm");
                                             var categoriesSection = context.pageContext.service.findControl("portfolioSummaryChartCategories");
                                             if (!categoriesSection) {
                                                 var categoriesOptions = context.pageContext.service.getPortfolioSummaryChartCategoriesUILayout();
                                                 context.pageContext.ui.children.push(categoriesOptions);
                                             } else {
                                                 ($("#" + categoriesSection.options.id) as any).removeClass("fadeOutLeft");
-                                                ($("#" + categoriesSection.options.id) as any).addClass("fadeInRight");
+                                                ($("#" + categoriesSection.options.id) as any).addClass("fadeInRightCate");
                                             }
                                         }
                                     }
@@ -683,7 +684,7 @@ export class ReplangService {
                                             ($("#" + summarySection.options.id) as any).addClass("fadeInLeft");
                                             var confirmSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
                                             ($("#" + confirmSection.options.id) as any).removeClass("fadeInRight");
-                                            ($("#" + confirmSection.options.id) as any).addClass("fadeOutLeft");
+                                            ($("#" + confirmSection.options.id) as any).addClass("fadeOutRightConfirm");
                                         }
                                     }
                                 }
@@ -700,7 +701,7 @@ export class ReplangService {
             type: "mySection",
             options: {
                 id: "portfolioSummaryChartCategories",
-                klass: "section-border fadeInRight",
+                klass: "section-border fadeInRightCate",
                 children: [
                     {
                         type: "myTitle",
@@ -782,14 +783,18 @@ export class ReplangService {
                     {
                         type: "mySpan",
                         options: {
-                            klass: "",
+                            klass: "section-span",
                             children: [
                                 {
                                     type: "myButton",
                                     options: {
                                         buttonText: "OK",
                                         click: function (context) {
-                                            window.open("http://localhost:3000/report/-3939;reportType=Portfolio", "Portfolio");
+                                            //window.open("http://localhost:3000/report/-3939;reportType=Portfolio", "Portfolio");
+                                            var categoriesSection = context.pageContext.service.findControl("portfolioSummaryChartCategories");
+                                            ($("#" + categoriesSection.options.id) as any).removeClass("fadeInRightCate");
+                                            ($("#" + categoriesSection.options.id) as any).addClass("fadeOutRightCate");
+                                            
                                         }
                                     }
                                 },
@@ -807,7 +812,14 @@ export class ReplangService {
                                     options: {
                                         buttonText: "Cancel",
                                         click: function (context) {
-
+                                            var summarySection = context.pageContext.service.findControl("portfolioSummary");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeInDown");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutUp");
+                                            ($("#" + summarySection.options.id) as any).removeClass("fadeOutRight");
+                                            ($("#" + summarySection.options.id) as any).addClass("fadeInLeft");
+                                            var categoriesSection = context.pageContext.service.findControl("portfolioSummaryChartCategories");
+                                            ($("#" + categoriesSection.options.id) as any).removeClass("fadeInRightCate");
+                                            ($("#" + categoriesSection.options.id) as any).addClass("fadeOutRightCate");
                                         }
                                     }
                                 }
