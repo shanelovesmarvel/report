@@ -185,6 +185,7 @@ export class ReplangService {
                 mode: appraisalParm.ParmTypeID,
                 value: detectValue(appraisalParm),
                 IsRequired: appraisalParm.IsRequired,
+                isMultiple: false,
                 items: [],
                 //We may need a common function to process the command
                 click: function (context) {

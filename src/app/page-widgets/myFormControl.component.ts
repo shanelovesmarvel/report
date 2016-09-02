@@ -15,7 +15,7 @@ import {  Router } from '@angular/router';
                <template [ngSwitchCase] = "options.mode === '11' 
                                         || options.mode === '13' 
                                         || options.mode === '309' ">
-                   <select class="form-control form-control-sm" id="twoColumnForm" 
+                   <select class="form-control form-control-sm" id="twoColumnForm" [multiple] = "options.isMultiple"
                             [disabled]="options.disabled" (change)="onchange($event)" 
                             (click)="clickHandler()" [required]="options.IsRequired">
                        <option *ngFor="let item of options.items" 
@@ -48,5 +48,16 @@ export class MyFormControlComponent {
         //context.service.router = this._router;
         this.options.click( this );
     
+    }
+
+    onchange(event) {
+        let selectedIndex = event.target.selectedIndex;
+        this.options.value = this.options.items[ selectedIndex ].value;
+        this.options.selectedIndex = selectedIndex;
+
+        if( this.options.onchange instanceof Function ){
+            let self = this;
+            this.options.onchange.call(self, this.options.value);
+        }
     }
 }
