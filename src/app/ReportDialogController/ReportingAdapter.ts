@@ -28,9 +28,9 @@ export class controlOption{
     footer: Array<BaseControl>;
     constructor(){
         this.beforeGroup = -1;
-        this.children = [];
-        this.body = [];
-        this.footer = [];
+        //this.children = [];
+        //this.body = [];
+        //this.footer = [];
     }
 }
 
@@ -57,7 +57,7 @@ export class DialogAdapter{
         if(repDLG.m_DLGITEMTEMPLATE[index].dtilClass === 'COMBOBOX'){
             //if(repDLG.m_DLGITEMTEMPLATE[index])
             result.isInbody = true;
-            if(rep8.ecdHasStyle(repECD,rep9.ADDS_DATE)){
+            if(rep8.ecdHasStyle(repECD,rep9.ADDS_DATE) || rep8.ecdHasExStyle(repECD,rep9.ADDS_DATE)){
                 result.options.id = dtilText + 'date';
                 result.type = 'myFormGroupDatepicker';
             }
@@ -68,14 +68,7 @@ export class DialogAdapter{
         }
         else if(repDLG.m_DLGITEMTEMPLATE[index].dtilClass.toUpperCase() === 'BUTTON'){
             if(
-                rep8.AdvStdButton(repDLG.m_DLGITEMTEMPLATE[index].dtilID)
-                /*dtilText.toUpperCase() === "OK" ||
-                dtilText.toUpperCase() === 'CANCEL' ||
-                dtilText.toUpperCase() === 'HELP' ||
-                dtilText.toUpperCase() === 'SETTINGS' ||
-                dtilText.toUpperCase() === 'CONSOLIDATE' ||
-                dtilText.toUpperCase() === 'BROWSE'*/
-                ){
+                rep8.AdvStdButton(repDLG.m_DLGITEMTEMPLATE[index].dtilID)){
                     result.isInbody = false;
                     result.type = 'myDialogButton';
                     result.options.id = dtilText + repDLG.m_DLGITEMTEMPLATE[index].dtilClass;//'myDialogButton';
@@ -86,6 +79,7 @@ export class DialogAdapter{
                 result.isInbody = true;
                 if(rep8.ecdHasStyle(repECD,rep9.ADDS_CHECK)){
                     result.type = 'myFormGroupCheckbox';
+                    result.options.label = dtilText;
                     while(1){ 
                         if(dtilText.indexOf(' ') !== -1){
                             dtilText = dtilText.replace(' ','');
@@ -94,11 +88,11 @@ export class DialogAdapter{
                             break;
                         }
                     }
-
                     result.options.id = dtilText + 'Checkbox';
                 }
-                else if(rep8.ecdHasStyle(repECD,rep9.ADDS_RADIO)){
+                else if(rep8.ecdHasStyle(repECD,rep9.ADDS_RADIO) || rep8.ecdHasExStyle(repECD,rep9.ADDS_RADIO)){
                     result.type = 'myFormGroupRadiobutton';
+                    result.options.label = dtilText;
                     while(1){ 
                         if(dtilText.indexOf(' ') !== -1){
                             dtilText = dtilText.replace(' ','');
@@ -112,15 +106,18 @@ export class DialogAdapter{
             }
         }
         else{
-            if(repDLG.m_DLGITEMTEMPLATE[index].dtilStyle === 33554436){
-                result.options.label = repDLG.m_DLGITEMTEMPLATE[index].dtilText.replace('&','');
-                return false;
-            }
+            //if(repDLG.m_DLGITEMTEMPLATE[index].dtilStyle === 33554436){
+            //    result.options.label = repDLG.m_DLGITEMTEMPLATE[index].dtilText.replace('&','');
+            //    return false;
+            //}
             result.options.dtlStyle = repECD.Style;
             result.options.dtlExStyle = repECD.ExStyle.xs;
             if(repECD.lab === '_asdtxt'){
                 result.isInbody = true;
                 result.type = 'myTitle';
+                result.options.title = repDLG.m_DLGITEMTEMPLATE[index].dtilText;
+                result.options.level = 6;
+                //console.warn(result.options.title);
             }
             
         }
@@ -162,14 +159,35 @@ export class DialogAdapter{
         digObj.type = 'myDialogBody';
         
         let secObj: BaseControl = new BaseControl();
+        //let titleObj: BaseControl = new BaseControl();
         secObj.type = 'mySection';
         secObj.options.klass = 'section';
         for(let i: number = 0; i < bodycontrol.length; i++){
+            //"exData": "$_asdtxt1"
+            if(bodycontrol[i].options.exData === '$_asdtxt1'){
+                if(digObj.options.children === undefined){
+                    digObj.options.children = [];
+                }
+                digObj.options.children.push(bodycontrol[i]);
+                continue;
+            }
+            if(secObj.options.children === undefined){
+                secObj.options.children = [];
+            }
             secObj.options.children.push(bodycontrol[i]);
         }
+        if(digObj.options.children === undefined){
+            digObj.options.children = [];
+        }
         digObj.options.children.push(secObj);
+        if(rootcontrol.options.body === undefined){
+            rootcontrol.options.body = [];
+        }
         rootcontrol.options.body.push(digObj);
         for(let i: number = 0; i < footcontrol.length; i++){
+            if(rootcontrol.options.footer === undefined){
+                rootcontrol.options.footer = [];
+            }
             rootcontrol.options.footer.push(footcontrol[i]);
         }
         console.warn(JSON.stringify(rootcontrol));
@@ -178,6 +196,7 @@ export class DialogAdapter{
     }
 
     private static FixforUI(repDLG: rep8.ReportDialog): any{
+        console.warn(repDLG);
         let mytempControls: Array<BaseControl> = [];
         let myControls: Array<BaseControl> = [];
         let dlgarray: Array<rep8.MYDLGITEMTEMPLATE> = repDLG.m_DLGITEMTEMPLATE;
@@ -194,6 +213,7 @@ export class DialogAdapter{
                 myControl.options.title = dlgarray[DIndex].dtilText;
                 myControl.options.level = 6;
                 myControl.options.name = dlgarray[DIndex].dtilText.replace(' ','');
+                myControl.type = 'myTitle';
                 groupname = myControl.options.name;
                 grounumber = dlgarray[DIndex].groupNumber;
             }
