@@ -2,6 +2,47 @@ import * as rep9 from '../RepTS/rep9';
 import * as rep8 from '../RepTS/rep8';
 import * as reps from '../RepTS/reps';
 
+export enum SSRSType{
+    Invalid = -1,
+    String = 1,
+    Date = 2,
+    Integer = 3,
+    Float = 4,
+    Boolean = 5,
+    RDLPickList_String = 11,
+    RDLPickList_Date = 12,
+    RDLPickList_Integer = 13,
+    RDLPickList_Float = 14,
+    RDLPickList_Boolean = 15,
+    FontPicker = 22,
+    PositiveInteger = 23,
+    SessionGuid = 31,
+    ServerURL = 34,
+    RDLMultiValueList_String = 41,
+    RDLMultiValueList_Date = 42,
+    RDLMultiValueList_Integer = 43,
+    RDLMultiValueList_Float = 44,
+    RDLMultiValueList_Boolean = 45,
+    RDLMultiValueBox_String = 51,
+    RDLMultiValueBox_Date = 52,
+    RDLMultiValueBox_Integer = 53,
+    RDLMultiValueBox_Float = 54,
+    RDLMultiValueBox_Boolean = 55,
+    RDLMultiValueEdit_String = 61,
+    RDLMultiValueEdit_Date = 62,
+    RDLMultiValueEdit_Integer = 63,
+    RDLMultiValueEdit_Float = 64,
+    RDLMultiValueEdit_Boolean = 65,
+    Portfolio = 301,
+    Contact = 302,
+    Activity = 303,
+    PortfolioBase_String = 304,
+    PortfolioBase_Integer = 305,
+    PortfolioBaseNoComposites = 309,
+    Security = 306,
+    SecurityType = 307,
+    User = 308,
+}
 
 export class controlOption{
     dialogId: string;

@@ -38,6 +38,12 @@ export  class ReportingData{
             ]);
     }
 
+    public static getLookupList(filter: string): any{
+        if(filter === 'currecy'){
+            return this.getReportingCurrencyList();
+        }        
+    }
+
     public static getReportingCurrencyList(): any{
         return (
             [ 

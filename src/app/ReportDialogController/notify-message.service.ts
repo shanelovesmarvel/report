@@ -1,15 +1,24 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ReportingData } from '../data/ReportingData';
+import { SSRSType } from './ReportingAdapter';
 import * as rep8 from '../RepTS/rep8';
 
 @Injectable()
 export class NotifiMessageService {
     RepTSMsg: EventEmitter<any>;
+    SSRSMsg: EventEmitter<any>;
     constructor(){
         this.RepTSMsg = new EventEmitter();
         this.RepTSMsg.subscribe(
             (msg: any) =>{
                 this.receiveMessage(msg);
+            }
+        );
+
+        this.SSRSMsg = new EventEmitter();
+        this.SSRSMsg.subscribe(
+            (msg: any) =>{
+                this.receiveSSRSMessage(msg);
             }
         );
     }
@@ -31,5 +40,30 @@ export class NotifiMessageService {
 
     sendMessage(message: any){
         this.RepTSMsg.emit(message);
+    }
+
+        receiveSSRSMessage(message: any){
+        //let modeID: number = message.options.mode;
+        //console.warn(message.options.mode);
+        //console.warn(modeID);
+        //console.warn(SSRSType.PortfolioBaseNoComposites.toString());
+        switch(message.options.mode){
+            case SSRSType.Portfolio.toString():
+            case SSRSType.PortfolioBaseNoComposites.toString():
+                //console.warn('!!!!');
+                message.options.items = ReportingData.getPortfoliolist();
+                break;
+            case SSRSType.RDLPickList_String.toString():
+                let ttStr: string = message.options.title.toUpperCase();
+                if(ttStr.indexOf('CURRENCY'))
+                message.options.items = ReportingData.getLookupList('currecy');
+                break;
+            default:
+                console.warn('Please check if the type is valid');
+                break;
+        }
+    }
+    sendSSRSMessage(message: any){
+        this.SSRSMsg.emit(message);
     }
 }

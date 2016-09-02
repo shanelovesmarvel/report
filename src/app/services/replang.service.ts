@@ -178,6 +178,7 @@ export class ReplangService {
     }
 
     public pushControls(sectionForms: Array<any>, appraisalParm: AppraisalParm) {
+        let that = this;
         let formControl: Object = {
             type: "myFormControl",
             options: {
@@ -189,13 +190,7 @@ export class ReplangService {
                 items: [],
                 //We may need a common function to process the command
                 click: function (context) {
-                    if(context.options.title === 'Portfolio *'){
-                        context.options.items = ReportingData.getPortfoliolist();
-                    }
-                    else if (context.options.title === 'Reporting Currency *'){
-                        context.options.items = ReportingData.getReportingCurrencyList();
-                    }
-                    console.warn(context);
+                    that._notify.sendSSRSMessage(context);
                 },
                 onchange: function () {
 
