@@ -1,0 +1,378 @@
+{
+    "isInbody": true,
+    "type": "myDialog",
+    "options": {
+        "beforeGroup": -1,
+        "children": [],
+        "body": [
+            {
+                "isInbody": true,
+                "type": "myDialogBody",
+                "options": {
+                    "beforeGroup": -1,
+                    "children": [
+                        {
+                            "isInbody": true,
+                            "type": "mySection",
+                            "options": {
+                                "beforeGroup": -1,
+                                "children": [
+                                    {
+                                        "isInbody": true,
+                                        "type": "myTitle",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 500,
+                                            "dtlStyle": 33554432,
+                                            "dtlExStyle": 8,
+                                            "labtype": "$",
+                                            "lab": "_asdtxt",
+                                            "lablen": 7,
+                                            "exData": "$_asdtxt1"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupDropdown",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 502,
+                                            "label": "Portfolio",
+                                            "labtype": "$",
+                                            "lab": "askport",
+                                            "lablen": 7,
+                                            "exData": "",
+                                            "id": "PortfoliomyFormGroupDropdown"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "title": "Calculate Performance",
+                                            "level": 6,
+                                            "name": "CalculatePerformance"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupRadiobutton",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 504,
+                                            "id": "NetofFeesRadio",
+                                            "labtype": "$",
+                                            "lab": "perffee",
+                                            "lablen": 7,
+                                            "exData": "y",
+                                            "groupName": "CalculatePerformance"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 505,
+                                            "labtype": "$",
+                                            "lab": "perffee",
+                                            "lablen": 7,
+                                            "exData": "n",
+                                            "groupName": "CalculatePerformance"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupCheckbox",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 506,
+                                            "id": "AccrueFeesCheckbox",
+                                            "labtype": "$",
+                                            "lab": "_accfee",
+                                            "lablen": 7,
+                                            "exData": "n"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "title": "Date Range",
+                                            "level": 6,
+                                            "name": "DateRange"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupDropdown",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 509,
+                                            "label": "From",
+                                            "labtype": "%",
+                                            "lab": "date1",
+                                            "lablen": 5,
+                                            "exData": "",
+                                            "id": "FrommyFormGroupDropdown",
+                                            "groupName": "DateRange"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupDropdown",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 511,
+                                            "label": "To",
+                                            "labtype": "%",
+                                            "lab": "cutdate",
+                                            "lablen": 7,
+                                            "exData": "",
+                                            "id": "TomyFormGroupDropdown",
+                                            "groupName": "DateRange"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "title": "Calculate Performance",
+                                            "level": 6,
+                                            "name": "CalculatePerformance"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupRadiobutton",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 513,
+                                            "id": "NetofFeesRadio",
+                                            "labtype": "$",
+                                            "lab": "perffee",
+                                            "lablen": 7,
+                                            "exData": "y",
+                                            "groupName": "CalculatePerformance"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 514,
+                                            "labtype": "$",
+                                            "lab": "perffee",
+                                            "lablen": 7,
+                                            "exData": "n",
+                                            "groupName": "CalculatePerformance"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupCheckbox",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 515,
+                                            "id": "AccrueFeesCheckbox",
+                                            "labtype": "$",
+                                            "lab": "_accfee",
+                                            "lablen": 7,
+                                            "exData": "n"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupDropdown",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 517,
+                                            "label": "Reporting Currency",
+                                            "labtype": "$",
+                                            "lab": "fx",
+                                            "lablen": 2,
+                                            "exData": "",
+                                            "id": "ReportingCurrencymyFormGroupDropdown"
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupCheckbox",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 518,
+                                            "id": "ChartCheckbox",
+                                            "labtype": "$",
+                                            "lab": "_graph",
+                                            "lablen": 6,
+                                            "exData": ""
+                                        }
+                                    },
+                                    {
+                                        "isInbody": true,
+                                        "type": "myFormGroupCheckbox",
+                                        "options": {
+                                            "beforeGroup": -1,
+                                            "children": [],
+                                            "body": [],
+                                            "footer": [],
+                                            "dtilID": 519,
+                                            "id": "IncludeUnsupervisedAssetsCheckbox",
+                                            "labtype": "$",
+                                            "lab": "_useun",
+                                            "lablen": 6,
+                                            "exData": "[SUB] M"
+                                        }
+                                    }
+                                ],
+                                "body": [],
+                                "footer": [],
+                                "klass": "section"
+                            }
+                        }
+                    ],
+                    "body": [],
+                    "footer": []
+                }
+            }
+        ],
+        "footer": [
+            {
+                "isInbody": false,
+                "type": "myDialogButton",
+                "options": {
+                    "beforeGroup": -1,
+                    "children": [],
+                    "body": [],
+                    "footer": [],
+                    "dtilID": 1,
+                    "id": "OKButton",
+                    "label": "OK",
+                    "messageID": 1
+                }
+            },
+            {
+                "isInbody": false,
+                "type": "myDialogButton",
+                "options": {
+                    "beforeGroup": -1,
+                    "children": [],
+                    "body": [],
+                    "footer": [],
+                    "dtilID": 2,
+                    "id": "CancelButton",
+                    "label": "Cancel",
+                    "messageID": 2
+                }
+            },
+            {
+                "isInbody": false,
+                "type": "myDialogButton",
+                "options": {
+                    "beforeGroup": -1,
+                    "children": [],
+                    "body": [],
+                    "footer": [],
+                    "dtilID": 12,
+                    "id": "HelpButton",
+                    "label": "Help",
+                    "messageID": 12
+                }
+            },
+            {
+                "isInbody": false,
+                "type": "myDialogButton",
+                "options": {
+                    "beforeGroup": -1,
+                    "children": [],
+                    "body": [],
+                    "footer": [],
+                    "dtilID": 13,
+                    "id": "ConsolidateBUTTON",
+                    "label": "Consolidate",
+                    "messageID": 13
+                }
+            },
+            {
+                "isInbody": false,
+                "type": "myDialogButton",
+                "options": {
+                    "beforeGroup": -1,
+                    "children": [],
+                    "body": [],
+                    "footer": [],
+                    "dtilID": 14,
+                    "id": "BrowseBUTTON",
+                    "label": "Browse",
+                    "messageID": 14
+                }
+            },
+            {
+                "isInbody": false,
+                "type": "myDialogButton",
+                "options": {
+                    "beforeGroup": -1,
+                    "children": [],
+                    "body": [],
+                    "footer": [],
+                    "dtilID": 16,
+                    "id": "SettingsBUTTON",
+                    "label": "Settings",
+                    "messageID": 16
+                }
+            }
+        ],
+        "title": "Appraisal",
+        "dialogId": "Appraisal",
+        "id": "Appraisal"
+    }
+}

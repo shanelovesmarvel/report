@@ -39,7 +39,7 @@ export class ReplangService {
     }
 
     public ssrsData: any;
-    
+
     public getSSRSData(): any {
         this._transporter.getSSRSData().subscribe((res: any) => {
             this.ssrsData = res;
@@ -48,7 +48,6 @@ export class ReplangService {
 
     public getSSRSReportUILayout(isDialog: boolean): Object {
         let ssrs: any = this.ssrsData;
-        console.warn(ssrs);
         let bodys = [];
         let section1forms1: Array<any> = [];
         let section1forms2: Array<any> = [];
@@ -101,6 +100,8 @@ export class ReplangService {
                         options: {
                             click: function (context) {
                                 if (isDialog) {
+                                    var ssrsDialog = context.pageContext.service.findControl("ssrs_report");
+                                    ($("#"+ssrsDialog.options.dialogId) as any).modal("hide");
                                     window.open("http://localhost:3000/report/-3939;reportType=SSRS", "SSRS");
                                 } else {
                                     var outputSection = context.pageContext.service.findControl("outputSection");
@@ -340,7 +341,7 @@ export class ReplangService {
                                         {
                                             type: "myButton",
                                             options: {
-                                                buttonText: "OK",
+                                                label: "OK",
                                                 id: "okBtn",
                                                 click: function (context) {
                                                     var summarySection = context.pageContext.service.findControl("portfolioSummary");
@@ -362,7 +363,7 @@ export class ReplangService {
                                         {
                                             type: "myButton",
                                             options: {
-                                                buttonText: "Consolidate",
+                                                label: "Consolidate",
                                                 id: "consolidateBtn",
                                                 click: function (context) {
                                                     var portfolio = context.pageContext.service.findControl("portfolioDropdown");
@@ -382,7 +383,7 @@ export class ReplangService {
                                         {
                                             type: "myButton",
                                             options: {
-                                                buttonText: "Browse",
+                                                label: "Browse",
                                                 id: "browseBtn",
                                                 click: function (context) {
 
@@ -392,7 +393,7 @@ export class ReplangService {
                                         {
                                             type: "myButton",
                                             options: {
-                                                buttonText: "Settings",
+                                                label: "Settings",
                                                 id: "settingsBtn",
                                                 click: function (context) {
 
@@ -402,7 +403,7 @@ export class ReplangService {
                                         {
                                             type: "myButton",
                                             options: {
-                                                buttonText: "Cancel",
+                                                label: "Cancel",
                                                 id: "cancelBtn",
                                                 click: function (context) {
 
@@ -591,7 +592,7 @@ export class ReplangService {
                                 {
                                     type: "myButton",
                                     options: {
-                                        buttonText: "OK",
+                                        label: "OK",
                                         id: "confirmChartBtn",
                                         click: function (context) {
                                             console.warn(context);
@@ -611,7 +612,7 @@ export class ReplangService {
                                 {
                                     type: "myButton",
                                     options: {
-                                        buttonText: "Cancel",
+                                        label: "Cancel",
                                         id: "cancelChartBtn",
                                         click: function (context) {
                                             var chartSection = context.pageContext.service.findControl("portfolioSummaryChart");
@@ -664,7 +665,7 @@ export class ReplangService {
                                 {
                                     type: "myButton",
                                     options: {
-                                        buttonText: "OK",
+                                        label: "OK",
                                         id: "confirmBtn",
                                         click: function (context) {
                                             var confirmSection = context.pageContext.service.findControl("portfolioSummaryConfirm");
@@ -684,7 +685,7 @@ export class ReplangService {
                                 {
                                     type: "myButton",
                                     options: {
-                                        buttonText: "Cancel",
+                                        label: "Cancel",
                                         id: "cancelChartBtn",
                                         click: function (context) {
                                             var summarySection = context.pageContext.service.findControl("portfolioSummary");
@@ -798,7 +799,7 @@ export class ReplangService {
                                 {
                                     type: "myButton",
                                     options: {
-                                        buttonText: "OK",
+                                        label: "OK",
                                         click: function (context) {
                                             var categoriesSection = context.pageContext.service.findControl("portfolioSummaryChartCategories");
                                             ($("#" + categoriesSection.options.id) as any).removeClass("fadeInRightCate");
@@ -811,7 +812,7 @@ export class ReplangService {
                                 {
                                     type: "myButton",
                                     options: {
-                                        buttonText: "Help",
+                                        label: "Help",
                                         click: function (context) {
 
                                         }
@@ -820,7 +821,7 @@ export class ReplangService {
                                 {
                                     type: "myButton",
                                     options: {
-                                        buttonText: "Cancel",
+                                        label: "Cancel",
                                         click: function (context) {
                                             var summarySection = context.pageContext.service.findControl("portfolioSummary");
                                             ($("#" + summarySection.options.id) as any).removeClass("fadeInDown");
@@ -878,271 +879,7 @@ export class ReplangService {
     }
 
     public getSummaryReportUILayout(): Object {
-        let that = this;
-        //return DialogAdapter.getrepJSON('psum','Portfolio summary');
-
-        return {
-            type: "myDialog",
-            options: {
-                id: "portfolio_summary",
-                dialogId: "portfolio_summary",
-                title: "Report: Summary",
-                body: [
-                    {
-                        type: "myDialogBody",
-                        options: {
-                            children: [
-                                {
-                                    type: "myTitle",
-                                    options: {
-                                        title: "This report displays portfolio holdings as a selected date, without detailing individual securities." +
-                                        "Values include cost basis, market value, percentage of portfolio, yield, and estimated annual income.",
-                                        level: 6
-                                    }
-                                },
-                                {
-                                    type: "mySection",
-                                    options: {
-                                        klass: "section",
-                                        children: [
-                                            {
-                                                type: "myFormGroupDropdown",
-                                                options: {
-                                                    id: "portfolioDropdown",
-                                                    label: "Portfolio",
-                                                    disabled: false,
-                                                    name: "portfolioDropdown",
-                                                    dtlID: 502,
-                                                    click: function (context) {
-                                                        console.warn('Send message for portfolio list');
-                                                        that._notify.sendMessage(context);
-                                                        //var portfolio = context.pageContext.service.findControl("portfolioDropdown");
-                                                        //portfolio.options.items = context.pageContext.data[1].portfolio;
-                                                    },
-                                                    onchange: function (value) {
-                                                        console.warn(value);
-                                                    }
-
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupDropdown",
-                                                options: {
-                                                    id: "currencyDropdown",
-                                                    label: "Reporting Currency",
-                                                    disabled: false,
-                                                    name: "currencyDropdown",
-                                                    dtlID: 510,
-                                                    click: function (context) {
-                                                        console.warn('Send message for Reporting Currency');
-                                                        that._notify.sendMessage(context);
-                                                        //var portfolio = context.pageContext.service.findControl("portfolioDropdown");
-                                                        //console.warn(portfolio.options.selectedIndex);
-                                                        //var currency = context.pageContext.service.findControl("currencyDropdown");
-                                                        //currency.options.items = context.pageContext.data[1].currency;
-                                                    },
-                                                    onchange: function (value) {
-                                                        console.warn(value);
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupDatepicker",
-                                                options: {
-                                                    label: "Date",
-                                                    id: "date"
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupCheckbox",
-                                                options: {
-                                                    label: "Include Unsupervised Assets",
-                                                    value: "icu",
-                                                    disabled: false,
-                                                    click: function (context) {
-
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupCheckbox",
-                                                options: {
-                                                    id: "chart",
-                                                    label: "Chart",
-                                                    disabled: false,
-                                                    value: "chart",
-                                                    dtlID: 400,
-                                                    click: function (context) {
-                                                        console.warn('Send message for chart');
-                                                        context.checked = !context.checked;
-                                                        that._notify.sendMessage(context);
-                                                        //var chartDialog = context.pageContext.service.getSummaryChartUILayout();
-                                                        //context.pageContext.ui.children.push(chartDialog);
-                                                        //context.options.modal = "modal";
-                                                        //context.options.target = "#portfolio_summary_chart";
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                type: "myTitle",
-                                                options: {
-                                                    title: "Calculate Performance",
-                                                    name: "calcType",
-                                                    level: 6
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupRadiobutton",
-                                                options: {
-                                                    id: "netoffee",
-                                                    label: "Net of Fee",
-                                                    value: "netoffee",
-                                                    groupName: "calcType",
-                                                    name: "netoffee",
-                                                    dtlID: 511,
-                                                    dtilStyle: 83886082,
-                                                    dialog: "dialog",
-                                                    click: function (context) {
-                                                        //var accfee = context.pageContext.service.findControl("accfee");
-                                                        //accfee.options.disabled = true;
-                                                        //context.pageContext.children
-                                                        that._notify.sendMessage(context);
-                                                        console.warn('Send message : net of fee');
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupRadiobutton",
-                                                options: {
-                                                    id: "grossoffee",
-                                                    label: "Gross of Fee",
-                                                    value: "grossoffee",
-                                                    groupName: "calcType",
-                                                    name: "grossoffee",
-                                                    dtlID: 512,
-                                                    dtilStyle: 83886082,
-                                                    dialog: "dialog",
-                                                    click: function (context) {
-                                                        that._notify.sendMessage(context);
-                                                        console.warn('Send message : Gross of fee');
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupCheckbox",
-                                                options: {
-                                                    id: "accfee",
-                                                    label: "Acc Fee",
-                                                    disabled: false,
-                                                    value: "accfee",
-                                                    name: "accfee",
-                                                    dtlID: 511,
-                                                    click: function (context) {                                                      
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupDropdown",
-                                                options: {
-                                                    id: "sectype",
-                                                    label: "Security Type",
-                                                    disabled: false,
-                                                    name: "sectype",
-                                                    dtlID: 520,
-                                                    dtilStyle: 268438144,
-                                                    dialog: "dialog",
-                                                    click: function (context) {
-                                                        that._notify.sendMessage(context);
-                                                        console.warn('Send message : sec type');
-                                                    },
-                                                    onchange: function (event) {                                                    
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                type: "myFormGroupDropdown",
-                                                options: {
-                                                    id: "secsymbol",
-                                                    label: "Security Symbol",
-                                                    disabled: false,
-                                                    name: "secsymbol",
-                                                    dtlID: 521,
-                                                    dtilStyle: 268438144,
-                                                    dialog: "dialog",
-                                                    click: function (context) {
-                                                        that._notify.sendMessage(context);
-                                                        console.warn('Send message : sec Symbol');
-                                                    },
-                                                    onchange: function (event) {
-
-                                                    }
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                ],
-                footer: [
-                    {
-                        type: "myDialogButton",
-                        options: {
-                            buttonText: "OK",
-                            id: "openConfirmDialog",
-                            modal: "modal",
-                            target: "#portfolio_summary_confirm",
-                            click: function (context) {
-                                console.warn(($("#date") as any).val());
-                                var confirmDialog = context.pageContext.service.getSummaryConfirmUILayout();
-                                context.pageContext.ui.children.push(confirmDialog);
-                            }
-                        }
-                    },
-                    {
-                        type: "myDialogButton",
-                        options: {
-                            buttonText: "Consolidate",
-                            click: function (context) {
-                                var portfolio = context.pageContext.service.findControl("portfolioDropdown");
-                                if (portfolio.options.items && portfolio.options.items.length > 0) {
-                                    var selectedItem = portfolio.options.items[portfolio.options.selectedIndex];
-                                    if (selectedItem.consolidated) {
-                                        selectedItem.text = selectedItem.text.substring(1);
-                                        selectedItem.consolidated = false;
-                                    } else {
-                                        selectedItem.text = "+" + selectedItem.text;
-                                        selectedItem.consolidated = true;
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    {
-                        type: "myDialogButton",
-                        options: {
-                            buttonText: "Browse",
-                            click: function (context) {
-
-                            }
-                        }
-                    },
-                    {
-                        type: "myDialogButton",
-                        options: {
-                            buttonText: "Settings",
-                            dtlID: 100,
-                            backdrop: "static",
-                            click: function (context) {
-                                that._notify.sendMessage(context);
-                            }
-                        }
-                    }
-                ]
-            }
-        }
-        
+        return DialogAdapter.getrepJSON('psum','Portfolio summary');      
     }
 
     public getSummaryChartUILayout(): Object {
@@ -1324,7 +1061,7 @@ export class ReplangService {
                     {
                         type: "myDialogButton",
                         options: {
-                            buttonText: "OK",
+                            label: "OK",
                             dismiss: "modal",
                             click: function (context) {
                                 var chart = context.pageContext.service.findControl("chart");
@@ -1364,7 +1101,7 @@ export class ReplangService {
                     {
                         type: "myDialogButton",
                         options: {
-                            buttonText: "OK",
+                            label: "OK",
                             modal: "modal",
                             target: "#portfolio_summary_chart_categories",
                             click: function (context) {
@@ -1472,7 +1209,7 @@ export class ReplangService {
                     {
                         type: "myDialogButton",
                         options: {
-                            buttonText: "OK",
+                            label: "OK",
                             dismiss: "modal",
                             click: function (context) {
                                 window.open("http://localhost:3000/report/-3939;reportType=Portfolio", "Portfolio");
@@ -1482,7 +1219,7 @@ export class ReplangService {
                     {
                         type: "myDialogButton",
                         options: {
-                            buttonText: "Help",
+                            label: "Help",
                             click: function (context) {
 
                             }
@@ -1565,7 +1302,7 @@ export class ReplangService {
                     {
                         type: "myDialogButton",//myDialogButton
                         options: {
-                            buttonText: "OK",
+                            label: "OK",
                             dialog: "Report_Setting",
                             click: function (context) {
 

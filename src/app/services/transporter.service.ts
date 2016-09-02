@@ -13,5 +13,5 @@ export class TransporterService {
        return this._http.get("src/app/data/ssrs.xml").map((res: any) => {
             return parser.xml2json(res._body);
         });
-    }
+    }  
 }

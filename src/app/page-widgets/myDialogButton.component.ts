@@ -17,7 +17,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
          [attr.data-dismiss]="options.dismiss"
          [attr.data-backdrop]="options.backdrop"
          [attr.data-keyboard]="options.keyboard"
-         (click)="clickHandler()" >{{ options.buttonText }}
+         (click)="clickHandler()" >{{ options.label }}
     </button>
 `
 })

@@ -177,15 +177,15 @@ export class PageEngineService {
                     type: "myDialogButton",
                     options: {
                         id: "openSummaryDialog",
-                        buttonText: "Run Summary Report",
+                        label: "Run Summary Report",
                         modal: "modal",
-                        target: "#portfolio_summary",
+                        target: "#Appraisal",
                         backdrop: "static",
                         keyboard: true,
                         click: function (context) {
                             var summaryDialog = context.pageContext.service.getSummaryUILayout();
                             context.pageContext.ui.children.push(summaryDialog);
-                            console.info(context);
+                            //console.info(context);
                         }
                     }
                 },
@@ -193,7 +193,7 @@ export class PageEngineService {
                     type: "myDialogButton",
                     options: {
                         id: "openSSRSDialog",
-                        buttonText: "Run SSRS Report",
+                        label: "Run SSRS Report",
                         modal: "modal",
                         target: "#ssrs_report",
                         backdrop: false,
@@ -201,7 +201,7 @@ export class PageEngineService {
                         click: function (context) {
                             var summaryDialog = context.pageContext.service.getSSRSUILayout();
                             context.pageContext.ui.children.push(summaryDialog);
-                            console.info(context);
+                            //console.info(context);
                         }
                     }
                 }

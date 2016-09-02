@@ -20,6 +20,6 @@ export class MyFormGroupDatePickerComponent implements OnChanges  {
     }
 
     ngOnChanges(){
-        console.log( this.options );
+        //console.log( this.options );
     }
 }
