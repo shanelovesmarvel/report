@@ -9,6 +9,7 @@ import { AppraisalParm } from '../model/appraisal.parm.model';
 import { NotifiMessageService } from '../ReportDialogController/notify-message.service';
 import { DialogAdapter } from '../ReportDialogController/ReportingAdapter';
 import { ReportingData } from '../data/ReportingData';
+import { BaseControl } from '../ReportDialogController/ReportingAdapter';
 
 function detectValue(appraisalParm) {
     if (appraisalParm.ParmSectionID === "1") {
@@ -47,6 +48,7 @@ export class ReplangService {
     }
 
     public getSSRSReportUILayout(isDialog: boolean): Object {
+        //this._transporter.getSSRSData();
         let ssrs: any = this.ssrsData;
         let bodys = [];
         let section1forms1: Array<any> = [];
@@ -56,6 +58,7 @@ export class ReplangService {
         let section1Parm: Array<AppraisalParm> = [];
         let section2Parm: Array<AppraisalParm> = [];
 
+        //if(ssrs === undefined) return;
         if (!ssrs.ParmDisplay) return;
 
         let ui: any;
@@ -875,8 +878,38 @@ export class ReplangService {
     }
 
     public getSummaryReportUILayout(): Object {
-        let json = DialogAdapter.getrepJSON('psum','Portfolio summary');  
-        console.error(json);
+        let that = this;
+        let json: BaseControl = DialogAdapter.getrepJSON('psum','Portfolio summary');
+        console.warn(json);
+        if(
+            json!== undefined && 
+            json.options!== undefined && 
+            json.options.body!== undefined && 
+            json.options.body.length >0 &&
+            json.options.body[0] !== undefined &&
+            json.options.body[0].options !== undefined && 
+            json.options.body[0].options.children!== undefined &&
+            json.options.body[0].options.children.length >0
+            ){
+                let myDlgchilden: Array<BaseControl> =  json.options.body[0].options.children;
+                for(let i: number = 0; i < myDlgchilden.length; i++){
+                    let myDlgchild: BaseControl = myDlgchilden[i];
+                    if(myDlgchild.type === 'mySection' && myDlgchild.options !== undefined && 
+                        myDlgchild.options.children !== undefined ){
+                            for(let j: number = 0; j< myDlgchild.options.children.length; j++){
+                                let myControl: BaseControl = myDlgchild.options.children[j];
+                                if(myControl.type === 'myFormGroupDropdown' || 
+                                    myControl.type === 'myFormGroupRadiobutton' ||
+                                    myControl.type === 'myFormGroupCheckbox' ||
+                                    myControl.type === ''){
+                                        myControl.options.click = function(context){
+                                            that._notify.sendMessage(context);
+                                        }
+                                    }
+                            }
+                    }
+                }
+        }
         return json;
     }
 

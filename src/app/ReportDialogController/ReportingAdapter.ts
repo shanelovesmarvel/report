@@ -64,6 +64,9 @@ export class controlOption{
     name: string;
     messageID: number;
     klass: string;
+    click: any;
+    onchange: any;
+    items: Array<any>;
     children: Array<BaseControl>;
     body: Array<BaseControl>;
     footer: Array<BaseControl>;
@@ -92,6 +95,7 @@ export class BaseControl{
 export class DialogAdapter{
     
     public static getmyControl(repDLG: rep8.ReportDialog, index: number, result: BaseControl, repECD?: rep8.ECD): boolean{
+        let that: any = {} ;
         //let result: BaseControl = new BaseControl();
         result.options.dtilID = repDLG.m_DLGITEMTEMPLATE[index].dtilID;
         let dtilText: string = repDLG.m_DLGITEMTEMPLATE[index].dtilText.replace('&','');
@@ -103,8 +107,10 @@ export class DialogAdapter{
                 result.type = 'myFormGroupDatepicker';
             }
             else{
-                //result.options.id = dtilText + result.options.label;
                 result.type = 'myFormGroupDropdown';
+                //result.options.click = function (context) {
+                //    that._notify.sendMessage(context);
+                //}
             }
         }
         else if(repDLG.m_DLGITEMTEMPLATE[index].dtilClass.toUpperCase() === 'BUTTON'){

@@ -165,7 +165,7 @@ export function SettingDlgProc(message: any){
 
 export function DialogProc(message: any){
 		console.warn(message);
-        switch(message.options.dtlID){
+        switch(message.options.dtilID){
             case 100:
                 var dlg = message.pageContext.service.getSettingDialog();
                 message.pageContext.ui.children.push(dlg);
@@ -192,7 +192,7 @@ export function DialogProc(message: any){
             case 502:
                 message.options.items = ReportingData.getPortfoliolist();
                 break;
-            case 510:
+            case 517:
                 message.options.items = ReportingData.getReportingCurrencyList();
                 break;
             case 511:
