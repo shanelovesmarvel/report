@@ -6,7 +6,7 @@ import { RepService } from './rep';
 import { Observable } from 'rxjs';
 
 import { AppraisalParm } from '../model/appraisal.parm.model';
-import { NotifiMessage } from '../ReportDialogController/NotifiMessage';
+import { NotifiMessageService } from '../ReportDialogController/notify-message.service';
 import { DialogAdapter } from '../ReportDialogController/ReportingAdapter';
 import { ReportingData } from '../data/ReportingData';
 
@@ -35,7 +35,7 @@ export class ReplangService {
 
     constructor(private _transporter: TransporterService, 
                 private _rep: RepService,
-                private _notify: NotifiMessage) {
+                private _notify: NotifiMessageService) {
     }
 
     public ssrsData: any;
@@ -880,7 +880,9 @@ export class ReplangService {
     }
 
     public getSummaryReportUILayout(): Object {
-        return DialogAdapter.getrepJSON('psum','Portfolio summary');      
+        let json = DialogAdapter.getrepJSON('psum','Portfolio summary');  
+        console.error(json);
+        return json;
     }
 
     public getSummaryChartUILayout(): Object {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ApplicationPipeline } from './application-pipeline.service';
 import { ReplangService } from './replang.service';
-import { EngineService } from './engine.service';
+import { EngineService } from '../engine/engine.service';
 import { TransporterService } from './transporter.service';
 
 @Injectable()

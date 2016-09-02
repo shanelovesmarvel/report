@@ -3,18 +3,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscriber } from 'rxjs';
 import { MyDivComponent } from '../page-widgets/mydiv.component';
 
-import { EngineService } from '../services/engine.service';
+import { EngineService } from '../engine/engine.service';
 import { PageEngineService } from '../services/page-engine.service';
 import { ReplangService } from '../services/replang.service';
 import { TransporterService } from '../services/transporter.service'; 
 import { RepService } from '../services/rep';
-import { NotifiMessage } from '../ReportDialogController/NotifiMessage';
+import { NotifiMessageService } from '../ReportDialogController/notify-message.service';
 
 @Component({
     selector: 'contentSelector',
     directives: [MyDivComponent],
     providers: [EngineService, PageEngineService, 
-                ReplangService, TransporterService, RepService, NotifiMessage],
+                ReplangService, TransporterService, RepService, NotifiMessageService],
     template: `<my-div [options]="options"></my-div>`
 })
 export class PageEngineComponent implements OnInit, OnDestroy {
