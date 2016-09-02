@@ -34,9 +34,9 @@ function detectTitle(appraisalParm) {
 @Injectable()
 export class ReplangService {
 
-    constructor(private _transporter: TransporterService, 
-                private _rep: RepService,
-                private _notify: NotifiMessageService) {
+    constructor(private _transporter: TransporterService,
+        private _rep: RepService,
+        private _notify: NotifiMessageService) {
     }
 
     public ssrsData: any;
@@ -104,7 +104,7 @@ export class ReplangService {
                             click: function (context) {
                                 if (isDialog) {
                                     var ssrsDialog = context.pageContext.service.findControl("ssrs_report");
-                                    ($("#"+ssrsDialog.options.dialogId) as any).modal("hide");
+                                    ($("#" + ssrsDialog.options.dialogId) as any).modal("hide");
                                     window.open("http://localhost:3000/report/-3939;reportType=SSRS", "SSRS");
                                 } else {
                                     var outputSection = context.pageContext.service.findControl("outputSection");
@@ -171,7 +171,7 @@ export class ReplangService {
                 id: "outputSection",
                 children: [
                     {
-                        
+
                     }
                 ]
             }
@@ -804,7 +804,7 @@ export class ReplangService {
                                             ($("#" + categoriesSection.options.id) as any).removeClass("fadeInRightCate");
                                             ($("#" + categoriesSection.options.id) as any).addClass("fadeOutRightCate");
                                             var outputSection = context.pageContext.service.getPortfolioSummaryOutput();
-                                            context.pageContext.ui.children.push(outputSection);                                          
+                                            context.pageContext.ui.children.push(outputSection);
                                         }
                                     }
                                 },
@@ -879,36 +879,52 @@ export class ReplangService {
 
     public getSummaryReportUILayout(): Object {
         let that = this;
-        let json: BaseControl = DialogAdapter.getrepJSON('psum','Portfolio summary');
+        let json: BaseControl = DialogAdapter.getrepJSON('psum', 'Portfolio summary');
         console.warn(json);
-        if(
-            json!== undefined && 
-            json.options!== undefined && 
-            json.options.body!== undefined && 
-            json.options.body.length >0 &&
+        if (
+            json !== undefined &&
+            json.options !== undefined &&
+            json.options.body !== undefined &&
+            json.options.body.length > 0 &&
             json.options.body[0] !== undefined &&
-            json.options.body[0].options !== undefined && 
-            json.options.body[0].options.children!== undefined &&
-            json.options.body[0].options.children.length >0
-            ){
-                let myDlgchilden: Array<BaseControl> =  json.options.body[0].options.children;
-                for(let i: number = 0; i < myDlgchilden.length; i++){
-                    let myDlgchild: BaseControl = myDlgchilden[i];
-                    if(myDlgchild.type === 'mySection' && myDlgchild.options !== undefined && 
-                        myDlgchild.options.children !== undefined ){
-                            for(let j: number = 0; j< myDlgchild.options.children.length; j++){
-                                let myControl: BaseControl = myDlgchild.options.children[j];
-                                if(myControl.type === 'myFormGroupDropdown' || 
-                                    myControl.type === 'myFormGroupRadiobutton' ||
-                                    myControl.type === 'myFormGroupCheckbox' ||
-                                    myControl.type === ''){
-                                        myControl.options.click = function(context){
-                                            that._notify.sendMessage(context);
-                                        }
-                                    }
+            json.options.body[0].options !== undefined &&
+            json.options.body[0].options.children !== undefined &&
+            json.options.body[0].options.children.length > 0
+        ) {
+            let myDlgchilden: Array<BaseControl> = json.options.body[0].options.children;
+            for (let i: number = 0; i < myDlgchilden.length; i++) {
+                let myDlgchild: BaseControl = myDlgchilden[i];
+                if (myDlgchild.type === 'mySection' && myDlgchild.options !== undefined &&
+                    myDlgchild.options.children !== undefined) {
+                    for (let j: number = 0; j < myDlgchild.options.children.length; j++) {
+                        let myControl: BaseControl = myDlgchild.options.children[j];
+                        if (myControl.type === 'myFormGroupDropdown' ||
+                            myControl.type === 'myFormGroupRadiobutton' ||
+                            myControl.type === 'myFormGroupCheckbox' ||
+                            myControl.type === '') {
+                            myControl.options.click = function (context) {
+                                that._notify.sendMessage(context);
                             }
+                        }
                     }
                 }
+            }
+        }
+        if (
+            json !== undefined &&
+            json.options !== undefined &&
+            json.options.footer !== undefined &&
+            json.options.footer.length > 0
+        ) {
+            let footchildren: Array<BaseControl> = json.options.footer;
+            for (let i: number = 0; i < footchildren.length; i++) {
+                let buttoncontrol: BaseControl = footchildren[i];
+                if (buttoncontrol.options !== undefined) {
+                    buttoncontrol.options.click = function (context) {
+                        that._notify.sendMessage(context);
+                    }
+                }
+            }
         }
         return json;
     }
@@ -1261,23 +1277,23 @@ export class ReplangService {
         }
     }
 
-    public getSettingDialog(): Object{
+    public getSettingDialog(): Object {
         let that = this;
-        return{
+        return {
             type: "myDialog",
-            options:{
+            options: {
                 dialogId: "Report_Setting",
                 title: "Settings",
                 body: [
                     {
                         type: "myDialogBody",
                         options: {
-                            children:[{
+                            children: [{
                                 type: "mySection",
                                 options: {
                                     klass: "section",
                                     children: [
-                                        {                                    
+                                        {
                                             type: "myFormGroupDropdown",
                                             options: {
                                                 id: "MBS",
@@ -1293,43 +1309,43 @@ export class ReplangService {
                                                 onchange: function (event) {
                                                 }
                                             }
-                                    },
-                                    {
-                                        type: "myFormGroupDropdown",
-                                        options: {
-                                            id: "TIPS",
-                                            label: "TIPS",
-                                            disabled: false,
-                                            name: "TIPS",
-                                            dtlID: 601,
-                                            dtilStyle: 268438144,
-                                            dialog: "Report_Setting",
-                                            click: function (context) {
-                                                that._notify.sendMessage(context);
-                                            },
-                                            onchange: function (event) {
+                                        },
+                                        {
+                                            type: "myFormGroupDropdown",
+                                            options: {
+                                                id: "TIPS",
+                                                label: "TIPS",
+                                                disabled: false,
+                                                name: "TIPS",
+                                                dtlID: 601,
+                                                dtilStyle: 268438144,
+                                                dialog: "Report_Setting",
+                                                click: function (context) {
+                                                    that._notify.sendMessage(context);
+                                                },
+                                                onchange: function (event) {
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "myFormGroupCheckbox",
+                                            options: {
+                                                label: "Override portfolio settings",
+                                                value: "icu",
+                                                dtlID: 500,
+                                                dialog: "Report_Setting",
+                                                disabled: false,
+                                                click: function (context) {
+                                                }
                                             }
                                         }
-                                    },
-                                    {
-                                        type: "myFormGroupCheckbox",
-                                        options: {
-                                            label: "Override portfolio settings",
-                                            value: "icu",
-                                            dtlID: 500,
-                                            dialog: "Report_Setting",
-                                            disabled: false,
-                                            click: function (context) {
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
+                                    ]
+                                }
                             }]
+                        }
                     }
-                }    
                 ],
-                footer:[  
+                footer: [
                     {
                         type: "myDialogButton",//myDialogButton
                         options: {

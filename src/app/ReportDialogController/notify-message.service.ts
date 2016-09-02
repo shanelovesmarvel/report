@@ -66,6 +66,7 @@ export class NotifiMessageService {
         }
     }
     sendSSRSMessage(message: any) {
+        console.warn(message);
         this.SSRSMsg.emit(message);
     }
 }

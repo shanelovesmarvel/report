@@ -195,12 +195,12 @@ export function DialogProc(message: any){
             case 517:
                 message.options.items = ReportingData.getReportingCurrencyList();
                 break;
-            case 511:
-                var naccfee = message.pageContext.service.findControl("accfee");
+            case 504:
+                var naccfee = message.pageContext.service.findControl("AccrueFeesCheckbox");
                 naccfee.options.disabled = false;
                 break;
-            case 512:
-                var accfee = message.pageContext.service.findControl("accfee");
+            case 505:
+                var accfee = message.pageContext.service.findControl("AccrueFeesCheckbox");
                 accfee.options.disabled = true;
                 break;
             case 520:
