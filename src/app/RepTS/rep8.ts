@@ -187,7 +187,6 @@ export function SettingDlgProc(message: any){
 }
 
 export function DialogProc(message: any){
-		console.warn(message);
         switch(message.options.dtilID){
             case 16:
                 var dlg = message.pageContext.service.getSettingDialog();

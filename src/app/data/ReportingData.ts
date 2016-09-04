@@ -213,26 +213,7 @@ export  class ReportingData{
     }
 
     public static getpsumJson(): any{
-        let rect: rep8.RECT = new rep8.RECT();
-        rect.right = 186;
-        rect.bottom = 332;
-        return this.getpsum();
-        //console.warn(rr);
-        //let result: rep8.ReportDialog = JSON.parse(rr);
-        // new rep8.ReportDialog(rect, 'Appraisal');
-
-        /*for(let i: number = 0; i<26; i++){
-            let dcd = new rep8.DCD();
-            let mresult = new rep8.MYDLGITEMTEMPLATE(dcd);
-            result.m_DLGITEMTEMPLATE.push(mresult);            
-        }
-
-        for(let i: number = 0; i<13; i++){
-            let mEcd = new rep8.ECD();
-            mEcd.id = 500 + i;
-            result.m_ECD.push(mEcd);
-        }*/
-        //return result;
+        return this.getpsum();        
     }
 
     private static getpsum(): any{

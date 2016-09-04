@@ -7,6 +7,7 @@ import * as rep8 from '../RepTS/rep8';
 export class NotifiMessageService {
     RepTSMsg: EventEmitter<any>;
     SSRSMsg: EventEmitter<any>;
+    RepTSUIMsg: EventEmitter<any>;
     constructor() {
         this.RepTSMsg = new EventEmitter();
         this.RepTSMsg.subscribe(
@@ -19,6 +20,12 @@ export class NotifiMessageService {
         this.SSRSMsg.subscribe(
             (msg: any) => {
                 this.receiveSSRSMessage(msg);
+            }
+        );
+        this.RepTSUIMsg = new EventEmitter();
+        this.RepTSUIMsg.subscribe(
+            (msg: any) => {
+                this.receiveRepTSUIMessage(msg);
             }
         );
     }
@@ -37,7 +44,6 @@ export class NotifiMessageService {
             rep8.DialogProc(message);
         }
     }
-
     sendMessage(message: any) {
         //console.warn('In Send Msg');
         console.warn(message);
@@ -62,7 +68,54 @@ export class NotifiMessageService {
         }
     }
     sendSSRSMessage(message: any) {
-        console.warn(message);
         this.SSRSMsg.emit(message);
+    }
+
+    receiveRepTSUIMessage(message: any){
+        console.warn('receive msg');
+        console.warn(message);
+        switch(message.options.dtilID){
+            case 1:
+                var summarySection = message.pageContext.service.findControl("Portfolio_Summary");
+                ($("#" + summarySection.options.id) as any).removeClass("fadeInDown");
+                ($("#" + summarySection.options.id) as any).removeClass("fadeOutUp");
+                ($("#" + summarySection.options.id) as any).removeClass("fadeInLeft");
+                ($("#" + summarySection.options.id) as any).addClass("fadeOutRight");
+                var confirmSection = message.pageContext.service.findControl("portfolioSummaryConfirm");
+                if (!confirmSection) {
+                    var chartOptions = message.pageContext.service.getPortfolioSummaryConfirmUILayout();
+                    message.pageContext.ui.children.push(chartOptions);
+                    } 
+                else {
+                    ($("#" + confirmSection.options.id) as any).removeClass("fadeOutRightConfirm");
+                    ($("#" + confirmSection.options.id) as any).addClass("fadeInRight");
+                }
+                break;
+            case 518:
+				//console.warn(message.checked);
+				message.checked = !message.checked;
+                message.options.checked = true;
+                var summarySection = message.pageContext.service.findControl("Portfolio_Summary");
+                ($("#" + summarySection.options.id) as any).removeClass("fadeInDown");
+                ($("#" + summarySection.options.id) as any).removeClass("fadeInLeft");
+                ($("#" + summarySection.options.id) as any).removeClass("fadeOutRight");
+                ($("#" + summarySection.options.id) as any).addClass("fadeOutUp");
+                var chartSection = message.pageContext.service.findControl("portfolioSummaryChart");
+                if (!chartSection) {
+                    var chartOptions = message.pageContext.service.getPortfolioSummaryChartUILayout();
+                    message.pageContext.ui.children.push(chartOptions);
+                    } 
+                else {
+                    ($("#" + chartSection.options.id) as any).removeClass("fadeOutDown");
+                    ($("#" + chartSection.options.id) as any).addClass("fadeInUp");
+                }
+                break;
+            default:
+                rep8.DialogProc(message);
+        }
+    }
+    sendRepTSUIMessage(message: any){
+        this.RepTSUIMsg.emit(message);
+        
     }
 }
