@@ -179,7 +179,8 @@ export class PageEngineService {
                         id: "openSummaryDialog",
                         label: "Run Summary Report",
                         modal: "modal",
-                        target: "#Appraisal",
+                        //target: "#Appraisal",
+                        target: "#Portfolio_Summary",
                         backdrop: "static",
                         keyboard: true,
                         click: function (context) {

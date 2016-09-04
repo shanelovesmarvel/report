@@ -149,7 +149,30 @@ export class EXSTYLE {
 }
 
 export function ChartDlgProc(message: any){
-    
+    switch(message.options.label){
+		case 'Pie':
+			var _3d = message.pageContext.service.findControl("3dCheck");
+            var _comLables = message.pageContext.service.findControl("labelCheck");
+            var _gridLines = message.pageContext.service.findControl("lineCheck"); 
+			_3d.options.disabled = !message.options.checked;
+			_comLables.options.disabled = !message.options.checked;
+			_gridLines.options.disabled = !message.options.checked;
+			break;
+		case 'Bar':
+			console.warn('bar: do nothing currently');
+			break;
+		case 'Column':
+			console.warn('Column: do nothing currently');
+			break;
+		case 'Line':
+			var _3d = message.pageContext.service.findControl("3dCheck");
+			var _comLables = message.pageContext.service.findControl("labelCheck");
+			var _gridLines = message.pageContext.service.findControl("lineCheck");
+			_3d.options.disabled = message.options.checked;
+			_comLables.options.disabled = message.options.checked;
+			_gridLines.options.disabled = message.options.checked;
+			break;
+	}
 }
 
 export function SettingDlgProc(message: any){
@@ -166,24 +189,27 @@ export function SettingDlgProc(message: any){
 export function DialogProc(message: any){
 		console.warn(message);
         switch(message.options.dtilID){
-            case 100:
+            case 16:
                 var dlg = message.pageContext.service.getSettingDialog();
                 message.pageContext.ui.children.push(dlg);
                 message.options.modal = "modal";
+				message.options.backdrop = 'static';
                 message.options.target = "#Report_Setting";
                 break;
-            case 400:
+            case 518:
 				//console.warn(message.checked);
+				message.checked = !message.checked;
                 if(message.checked === true){
                     var dlg = message.pageContext.service.getSummaryChartUILayout();
                     message.pageContext.ui.children.push(dlg);
                     message.options.modal = "modal";
                     message.options.target = "#myportfolio_chart";
+					message.checked = true;
                 }
                 else{
                     message.pageContext.ui.children.pop();
+					message.checked = false;
                 }
-				//console.warn(message.pageContext.ui.);
                 break;
 			case 401:
 				var chartOptions = message.pageContext.service.getPortfolioSummaryChartUILayout();

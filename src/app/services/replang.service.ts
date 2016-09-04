@@ -964,12 +964,12 @@ export class ReplangService {
                                                     click: function (context) {
                                                         that._notify.sendMessage(context);
                                                         console.warn('send message for pie');
-                                                        var _3d = context.pageContext.service.findControl("3dCheck");
-                                                        var _comLables = context.pageContext.service.findControl("labelCheck");
-                                                        var _gridLines = context.pageContext.service.findControl("lineCheck");
-                                                        _3d.options.disabled = !context.options.checked;
-                                                        _comLables.options.disabled = !context.options.checked;
-                                                        _gridLines.options.disabled = !context.options.checked;
+                                                        //var _3d = context.pageContext.service.findControl("3dCheck");
+                                                        //var _comLables = context.pageContext.service.findControl("labelCheck");
+                                                        //var _gridLines = context.pageContext.service.findControl("lineCheck");
+                                                        //_3d.options.disabled = !context.options.checked;
+                                                        //_comLables.options.disabled = !context.options.checked;
+                                                        //_gridLines.options.disabled = !context.options.checked;
 
                                                     }
                                                 }
@@ -984,7 +984,7 @@ export class ReplangService {
                                                     dialog: 'portfolio_chart',
                                                     click: function (context) {
                                                         that._notify.sendMessage(context);
-                                                        console.warn('send message for bar');
+                                                        //console.warn('send message for bar');
                                                     }
                                                 }
                                             },
@@ -998,7 +998,7 @@ export class ReplangService {
                                                     dialog: 'portfolio_chart',
                                                     click: function (context) {
                                                         that._notify.sendMessage(context);
-                                                        console.warn('send message for column');
+                                                        //console.warn('send message for column');
                                                     }
                                                 }
                                             },
@@ -1013,12 +1013,12 @@ export class ReplangService {
                                                     click: function (context) {
                                                         that._notify.sendMessage(context);
                                                         console.warn('send message for Line');
-                                                        var _3d = context.pageContext.service.findControl("3dCheck");
-                                                        var _comLables = context.pageContext.service.findControl("labelCheck");
-                                                        var _gridLines = context.pageContext.service.findControl("lineCheck");
-                                                        _3d.options.disabled = context.options.checked;
-                                                        _comLables.options.disabled = context.options.checked;
-                                                        _gridLines.options.disabled = context.options.checked;
+                                                        //var _3d = context.pageContext.service.findControl("3dCheck");
+                                                        //var _comLables = context.pageContext.service.findControl("labelCheck");
+                                                        //var _gridLines = context.pageContext.service.findControl("lineCheck");
+                                                        //_3d.options.disabled = context.options.checked;
+                                                        //_comLables.options.disabled = context.options.checked;
+                                                        //_gridLines.options.disabled = context.options.checked;
                                                     }
                                                 }
                                             }

@@ -67,6 +67,7 @@ export class controlOption{
     click: any;
     onchange: any;
     items: Array<any>;
+    backdrop: string;
     children: Array<BaseControl>;
     body: Array<BaseControl>;
     footer: Array<BaseControl>;

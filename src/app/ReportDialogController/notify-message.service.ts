@@ -39,16 +39,12 @@ export class NotifiMessageService {
     }
 
     sendMessage(message: any) {
-        console.warn('In Send Msg');
+        //console.warn('In Send Msg');
         console.warn(message);
         this.RepTSMsg.emit(message);
     }
 
     receiveSSRSMessage(message: any) {
-        //let modeID: number = message.options.mode;
-        //console.warn(message.options.mode);
-        //console.warn(modeID);
-        //console.warn(SSRSType.PortfolioBaseNoComposites.toString());
         switch (message.options.mode) {
             case SSRSType.Portfolio.toString():
             case SSRSType.PortfolioBaseNoComposites.toString():
