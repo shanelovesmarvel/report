@@ -189,7 +189,7 @@ export function SettingDlgProc(message: any){
 export function DialogProc(message: any){
         switch(message.options.dtilID){
             case 16:
-                var dlg = message.pageContext.service.getSettingDialog();
+                var dlg = message.pageContext.service.getSettingsUILayout();
                 message.pageContext.ui.children.push(dlg);
                 message.options.modal = "modal";
 				message.options.backdrop = 'static';

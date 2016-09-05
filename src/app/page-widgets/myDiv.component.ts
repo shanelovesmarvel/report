@@ -101,7 +101,14 @@ export class MyDivComponent implements OnChanges {
     }
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-        console.warn(this.options);
+        if(!this.options) {
+            this.options = {
+                ui: {
+                    children: []
+                }
+            }
+        }
+        //console.warn(changes);
         for (let propName in changes) {
             let chng = changes[propName];
             let cur = chng.currentValue;

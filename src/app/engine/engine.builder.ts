@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { ReplangService } from '../services/replang.service';
 import { TransporterService } from '../services/transporter.service';
 import { NotifiMessageService } from '../ReportDialogController/notify-message.service';
+import { EngineLayoutAPIService } from './engine.layout.api';
+
 
 
 @Injectable()
@@ -19,6 +21,7 @@ export class EngineBuilder {
 		pageClasses.push(ReplangService);
 		pageClasses.push(TransporterService);
 		pageClasses.push(NotifiMessageService);
+		pageClasses.push(EngineLayoutAPIService);
 
 		// get root injector
 		let rootInjector = this._applicationRef.injector;
@@ -61,11 +64,10 @@ export class EngineBuilder {
 			}
 		}
 
-		let layout = pageBuilder.getLayout(pageParameters);
-
-		// 
-		return pageBuilder.getData(pageParameters).map((res: any) => {
-			let data = res;
+		// layour
+		return Observable.zip(pageBuilder.getData(pageParameters), pageBuilder.getLayout(pageParameters), ( resData: any, resLayout: any) => {
+			let data: any = resData;
+			let layout: any = resLayout;
 
 			// 
 			pageBuilder.prepareLayout(data, layout);
@@ -75,7 +77,6 @@ export class EngineBuilder {
 				ui: layout,
 				service: service
 			}
-
 
 			return result;
 		});

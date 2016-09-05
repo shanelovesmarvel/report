@@ -1,6 +1,7 @@
 import { TransporterService } from './transporter.service';
 import { Observable } from 'rxjs';
 
+// This file is just an example about Observable.
 function inherit(proto){
     function F() {};
     F.prototype = proto;

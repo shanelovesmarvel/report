@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { TransporterService } from './transporter.service';
 
-import { RepService } from './rep';
 import { Observable } from 'rxjs';
 
 import { AppraisalParm } from '../model/appraisal.parm.model';
@@ -34,8 +33,8 @@ function detectTitle(appraisalParm) {
 @Injectable()
 export class ReplangService {
 
-    constructor(private _transporter: TransporterService,
-        private _rep: RepService,
+    constructor(
+        private _transporter: TransporterService,
         private _notify: NotifiMessageService) {
     }
 
@@ -47,9 +46,10 @@ export class ReplangService {
         });
     }
 
-    public getSSRSReportUILayout(isDialog: boolean): Object {
+    public getSSRSReportUILayout(isDialog: boolean, ssrsData: any): Object {
         //this._transporter.getSSRSData();
-        let ssrs: any = this.ssrsData;
+        let ssrs: any = ssrsData;
+        console.info(ssrs);
         let bodys = [];
         let section1forms1: Array<any> = [];
         let section1forms2: Array<any> = [];
@@ -57,11 +57,9 @@ export class ReplangService {
         let section2forms2: Array<any> = [];
         let section1Parm: Array<AppraisalParm> = [];
         let section2Parm: Array<AppraisalParm> = [];
+        
+        let ui: any = {};
 
-        //if(ssrs === undefined) return;
-        if (!ssrs.ParmDisplay) return;
-
-        let ui: any;
         if (isDialog) {
             ui = {
                 type: "myDialog",
@@ -105,7 +103,7 @@ export class ReplangService {
                                 if (isDialog) {
                                     var ssrsDialog = context.pageContext.service.findControl("ssrs_report");
                                     ($("#" + ssrsDialog.options.dialogId) as any).modal("hide");
-                                    window.open("http://localhost:3000/report/-3939;reportType=SSRS", "SSRS");
+                                    window.open("http://localhost:3000/report/-3939", "SSRS");
                                 } else {
                                     var outputSection = context.pageContext.service.findControl("outputSection");
                                     outputSection.options.children = [];
@@ -205,7 +203,6 @@ export class ReplangService {
 
     public addRowToForm(sectionRows: Array<AppraisalParm>, sectionForms1: Array<any>, sectionForms2: Array<any>): void {
         let halfLength: number = Math.ceil(sectionRows.length / 2);
-        console.info(sectionRows);
         for (let i = 0; i < sectionRows.length; i++) {
             let appraisalParm: AppraisalParm = sectionRows[i];
             if (i < halfLength) {
@@ -695,7 +692,7 @@ export class ReplangService {
                     {
                         type: "myTitle",
                         options: {
-                            title: "Portfolio Summary Report Output",
+                            title: "Report Output",
                             level: 3
                         }
                     },
@@ -712,12 +709,13 @@ export class ReplangService {
     }
 
     public getSummaryConfirmation(): string {
+        /*
         this._rep.getSecuritySymbolsByType("rockets");
         let result: string = "";
         this._rep.securitySymbols().subscribe((res: any) => {
             result = res;
         });
-        //return result;
+        return result; */
         return "Prices are not avaliable for 12/31/2016. Do you wish to continue to run this report ?";
     }
 
@@ -1103,7 +1101,7 @@ export class ReplangService {
                             label: "OK",
                             dismiss: "modal",
                             click: function (context) {
-                                window.open("http://localhost:3000/report/-3939;reportType=Portfolio", "Portfolio");
+                                window.open("http://localhost:3000/report/-3939", "Portfolio");
                             }
                         }
                     },
@@ -1121,7 +1119,7 @@ export class ReplangService {
         }
     }
 
-    public getSettingDialog(): Object {
+    public getSettingsUILayout(): Object {
         let that = this;
         return {
             type: "myDialog",

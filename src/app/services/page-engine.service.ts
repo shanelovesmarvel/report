@@ -111,7 +111,7 @@ export class PageEngineService {
         let that = this;
 
         // ui
-        let ui = that._replangService.getSSRSReportUILayout(false);
+        let ui = that._replangService.getSSRSReportUILayout(false, this._replangService.ssrsData);
 
         let result = {
             data: data,
@@ -121,7 +121,6 @@ export class PageEngineService {
 
         return result;
     }
-
 
     private showDialogs() {
         // data
@@ -156,11 +155,11 @@ export class PageEngineService {
         }
 
         let getSSRSUILayout = function () {
-            return that._replangService.getSSRSReportUILayout(true);
+            return that._replangService.getSSRSReportUILayout(true, this._replangService.ssrsData);
         }
 
-        let getSettingDialog = function () {
-            return that._replangService.getSettingDialog();
+        let getSettingsUILayout = function () {
+            return that._replangService.getSettingsUILayout();
         }
 
         // rebind this by bind.
@@ -169,7 +168,7 @@ export class PageEngineService {
         service.getSummaryUILayout = getSummaryUILayout.bind(this);
         service.getSummaryChartCategoriesUILayout = getSummaryChartCategoriesUILayout.bind(this);
         service.getSSRSUILayout = getSSRSUILayout.bind(this);
-        service.getSettingDialog = getSettingDialog.bind(this);
+        service.getSettingsUILayout = getSettingsUILayout.bind(this);
 
         let ui = {
             children: [

@@ -15,9 +15,9 @@ import { EngineBuilder } from './engine.builder';
 	selector: 'contentSelector',
 	directives: [MyDivComponent],
 	providers: [EngineService,  EngineBuilder],
-	template: `<div class="card"><my-div [options]="options"></my-div></div>`
+	template: `<div><my-div [options]="options"></my-div></div>`
 })
-export class UIEngineV2Component implements OnInit, OnDestroy {
+export class EngineComponent implements OnInit, OnDestroy {
 	private options: any;
 	private _subscriber: any;
 
@@ -36,7 +36,7 @@ export class UIEngineV2Component implements OnInit, OnDestroy {
 
 			this._builder.getPage(id, linkfield)
 				.subscribe((pageData: any) => {
-
+					console.warn(pageData);
 					// add engine service
 					for (let methodName in this._engineService) {
 						//if (this._engineService.hasOwnProperty(methodName)) {
@@ -67,7 +67,6 @@ export class UIEngineV2Component implements OnInit, OnDestroy {
 
 						child.options.pageContext = pageData;
 						child.options.service = service;
-						console.log(child);
 					}
 
 
