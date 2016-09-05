@@ -11,6 +11,7 @@ import { MyDialogButtonComponent } from './myDialogButton.component';
 import { MySpanComponent } from './mySpan.component';
 import { MyFormComponent } from './myForm.component';
 import { MySectionComponent } from './mySection.component';
+import { MyListBoxComponent } from './myListbox.component';
 
 /*
 * myDiv is container component.
@@ -20,7 +21,7 @@ import { MySectionComponent } from './mySection.component';
     selector: 'my-div',
     directives: [ROUTER_DIRECTIVES, MyTitleComponent, MyDivComponent, MyButtonGroupComponent, 
                  MyDropdownComponent, MyGridComponent, MyCardComponent, MyDialogComponent, 
-                 MyDialogButtonComponent, MySpanComponent, MyFormComponent, MySectionComponent],
+                 MyDialogButtonComponent, MySpanComponent, MyFormComponent, MySectionComponent, MyListBoxComponent],
     template: `
 <div>
     <div *ngFor="let d of options.ui.children; let i = index">
@@ -85,6 +86,10 @@ import { MySectionComponent } from './mySection.component';
         <my-section *ngIf="d.type === 'mySection'"
                  [options] = d.options  [pageContext] = "options">
         </my-section>
+
+        <my-listbox *ngIf="d.type ==='myListbox' "
+                 [options] = d.options [pageContext] = "options">
+        </my-listbox>
 
     </div>
 </div>

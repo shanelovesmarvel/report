@@ -39,19 +39,19 @@ export class PageEngineService {
 
         let that = this;
 
-        let getPortfolioSummaryChartUILayout = function() {
+        let getPortfolioSummaryChartUILayout = function () {
             return that._replangService.getPortfolioSummaryChartUILayout();
         }
 
-        let getPortfolioSummaryConfirmUILayout = function() {
+        let getPortfolioSummaryConfirmUILayout = function () {
             return that._replangService.getPortfolioSummaryConfirmUILayout();
         }
 
-        let getPortfolioSummaryChartCategoriesUILayout = function(){
+        let getPortfolioSummaryChartCategoriesUILayout = function () {
             return that._replangService.getPortfolioSummaryChartCategoriesUILayout();
         }
 
-        let getPortfolioSummaryOutput = function(){
+        let getPortfolioSummaryOutput = function () {
             return that._replangService.getPortfolioSummaryOutput();
         }
 
@@ -159,7 +159,7 @@ export class PageEngineService {
             return that._replangService.getSSRSReportUILayout(true);
         }
 
-        let getSettingDialog = function(){
+        let getSettingDialog = function () {
             return that._replangService.getSettingDialog();
         }
 
@@ -186,7 +186,6 @@ export class PageEngineService {
                         click: function (context) {
                             var summaryDialog = context.pageContext.service.getSummaryUILayout();
                             context.pageContext.ui.children.push(summaryDialog);
-                            //console.info(context);
                         }
                     }
                 },
@@ -202,7 +201,56 @@ export class PageEngineService {
                         click: function (context) {
                             var summaryDialog = context.pageContext.service.getSSRSUILayout();
                             context.pageContext.ui.children.push(summaryDialog);
-                            //console.info(context);
+                        }
+                    }
+                },
+                // listbox example
+                // To show it, make isHidden false
+                {
+                    type: "myListbox",
+                    options: {
+                        controlId: "listbox",
+                        isHidden: true,
+                        label: "Portfolio Codes",
+                        items: [
+                            {
+                                "value": "csus",
+                                "text": "csus"
+                            },
+                            {
+                                "value": "cbus",
+                                "text": "cbus"
+                            },
+                            {
+                                "value": "cmus",
+                                "text": "cmus"
+                            },
+                            {
+                                "value": "csde",
+                                "text": "csde"
+                            },
+                            {
+                                "value": "cbde",
+                                "text": "cbde"
+                            },
+                            {
+                                "value": "cmde",
+                                "text": "cmde"
+                            },
+                            {
+                                "value": "psus",
+                                "text": "psus"
+                            },
+                            {
+                                "value": "1sus",
+                                "text": "1sus"
+                            }
+                        ],
+                        click: function (context) {
+
+                        },
+                        onchange: function (context) {
+
                         }
                     }
                 }
